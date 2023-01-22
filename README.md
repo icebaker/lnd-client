@@ -33,6 +33,10 @@ client.lightning.wallet_balance.to_h # =>
 #  :locked_balance=>0,
 #  :reserved_balance_anchor_chan=>20000,
 #  :account_balance=>{"default"=>{:confirmed_balance=>101527, :unconfirmed_balance=>0}}}
+
+client.lightning.get_node_info(
+  pub_key: '02d3c80335a8ccb2ed364c06875f32240f36f7edb37d80f8dbe321b4c364b6e997'
+).node.alias # => 'icebaker/old-stone'
 ```
 
 ### Documentation
