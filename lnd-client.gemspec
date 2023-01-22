@@ -3,23 +3,23 @@
 require_relative 'static/spec'
 
 Gem::Specification.new do |spec|
-  spec.name    = Static::Spec[:name]
-  spec.version = Static::Spec[:version]
-  spec.authors = [Static::Spec[:author]]
+  spec.name    = Static::SPEC[:name]
+  spec.version = Static::SPEC[:version]
+  spec.authors = [Static::SPEC[:author]]
 
-  spec.summary = Static::Spec[:summary]
-  spec.description = Static::Spec[:description]
+  spec.summary = Static::SPEC[:summary]
+  spec.description = Static::SPEC[:description]
 
-  spec.homepage = Static::Spec[:github]
+  spec.homepage = Static::SPEC[:github]
 
-  spec.license = Static::Spec[:license]
+  spec.license = Static::SPEC[:license]
 
   spec.required_ruby_version = Gem::Requirement.new('>= 3.2.0')
 
   spec.metadata['allowed_push_host'] = 'https://rubygems.org'
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = Static::Spec[:github]
+  spec.metadata['source_code_uri'] = Static::SPEC[:github]
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject do |f|

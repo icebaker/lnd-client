@@ -1,4 +1,4 @@
-# Nitrox Streams
+# Lightning Network Daemon client for Ruby
 
 ## Development
 

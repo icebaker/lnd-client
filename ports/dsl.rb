@@ -4,6 +4,6 @@ require_relative '../static/spec'
 
 module LNDClient
   def version
-    Static::Spec[:version]
+    Static::SPEC[:version]
   end
 end
