@@ -1,6 +1,15 @@
 AllCops:
   TargetRubyVersion: 3.2.0
   NewCops: enable
+  Exclude:
+    - 'components/grpc/*'
+    - 'components/grpc/**/*'
 
 Style/Documentation:
   Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - 'ports/dsl/lnd-client.rb'
+
+require: rubocop-rake
