@@ -7,6 +7,7 @@ source 'https://rubygems.org'
 gem 'grpc', '~> 1.50'
 
 group :test, :development do
+  gem 'rake', '~> 13.0', '>= 13.0.6'
   gem 'grpc-tools', '~> 1.50'
   gem 'pry-byebug', '~> 3.10', '>= 3.10.1'
   gem 'rubocop', '~> 1.43'
