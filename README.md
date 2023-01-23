@@ -40,6 +40,14 @@ client.lightning.wallet_balance.to_h # =>
 client.lightning.get_node_info(
   pub_key: '02d3c80335a8ccb2ed364c06875f32240f36f7edb37d80f8dbe321b4c364b6e997'
 ).node.alias # => 'icebaker/old-stone'
+
+client.lightning.subscribe_channel_graph do |data|
+  puts data.inspect # => { ... }
+end
+
+client.router.subscribe_htlc_events do |data|
+  puts data.inspect # => { ... }
+end
 ```
 
 ### Documentation
