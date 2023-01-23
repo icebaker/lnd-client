@@ -13,11 +13,11 @@ class ServiceController
     @doc = DocumentationController.new(self)
   end
 
-  def call!(method_key, desc, *args, &)
+  def call!(method_key, desc, *args, &block)
     @stub.method(method_key).call(
       desc.input.new(*args),
       { metadata: { macaroon: @client.config.macaroon } },
-      &
+      &block
     )
   end
 
@@ -26,11 +26,11 @@ class ServiceController
     (desc && @stub.respond_to?(method_name)) || super
   end
 
-  def method_missing(method_name, *args, &)
+  def method_missing(method_name, *args, &block)
     desc = @doc.grpc(method_name)
 
     raise ArgumentError, "Method `#{method_name}` doesn't exist." unless desc && @stub.respond_to?(method_name)
 
-    call!(method_name, desc, *args, &)
+    call!(method_name, desc, *args, &block)
   end
 end

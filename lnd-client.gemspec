@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
 
   spec.license = Static::SPEC[:license]
 
-  spec.required_ruby_version = Gem::Requirement.new('>= 3.2.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 3.0.0')
 
   spec.metadata['allowed_push_host'] = 'https://rubygems.org'
 
