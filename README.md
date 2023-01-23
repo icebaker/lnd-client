@@ -122,5 +122,5 @@ gem build lnd-client.gemspec
 
 gem signin
 
-em push lnd-client-0.0.2.gem
+gem push lnd-client-0.0.2.gem
 ```
