@@ -13,13 +13,13 @@
 Add to your `Gemfile`:
 
 ```ruby
-gem 'lnd-client', '~> 0.0.1'
+gem 'lnd-client', '~> 0.0.2'
 ```
 
 ```ruby
 require 'lnd-client'
 
-puts LNDClient.version # => 0.0.1
+puts LNDClient.version # => 0.0.2
 
 client = LNDClient.new(
   certificate_path: '/lnd/tls.cert',
@@ -55,7 +55,7 @@ end
 ```ruby
 require 'lnd-client'
 
-puts LNDClient.version # => 0.0.1
+puts LNDClient.version # => 0.0.2
 
 client = LNDClient.new(
   certificate_path: '/lnd/tls.cert',
@@ -122,5 +122,5 @@ gem build lnd-client.gemspec
 
 gem signin
 
-em push lnd-client-0.0.1.gem
+em push lnd-client-0.0.2.gem
 ```
