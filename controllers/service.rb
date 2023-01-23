@@ -13,10 +13,11 @@ class ServiceController
     @doc = DocumentationController.new(self)
   end
 
-  def call!(method_key, desc, *args)
+  def call!(method_key, desc, *args, &)
     @stub.method(method_key).call(
       desc.input.new(*args),
-      { metadata: { macaroon: @client.config.macaroon } }
+      { metadata: { macaroon: @client.config.macaroon } },
+      &
     )
   end
 

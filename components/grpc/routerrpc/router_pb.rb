@@ -3,7 +3,7 @@
 
 require 'google/protobuf'
 
-require_relative 'lightning_pb'
+require_relative '../lightning_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("routerrpc/router.proto", :syntax => :proto3) do

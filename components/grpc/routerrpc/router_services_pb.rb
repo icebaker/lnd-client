@@ -2,7 +2,7 @@
 # Source: routerrpc/router.proto for package 'routerrpc'
 
 require 'grpc'
-require_relative 'routerrpc/router_pb'
+require_relative './router_pb'
 
 module Routerrpc
   module Router

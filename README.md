@@ -1,9 +1,12 @@
 # Ruby _Lightning Network Daemon_ Client
 
+> ⚠️ Warning: Early-stage, breaking changes are expected.
+
 - [Usage](#usage)
   - [Documentation](#documentation)
 - [Development](#development)
   - [Upgrading gRPC Proto Files](#upgrading-grpc-proto-files)
+  - [Publish to RubyGems](#publish-to-rubygems)
 
 ## Usage
 
@@ -94,8 +97,22 @@ require 'lnd-client'
 puts LNDClient.version
 ```
 
+```sh
+bundle
+rubocop -A
+```
+
 ### Upgrading gRPC Proto Files
 
 ```sh
 bundle exec rake grpc:upgrade
+```
+### Publish to RubyGems
+
+```sh
+gem build lnd-client.gemspec
+
+gem signin
+
+em push lnd-client-0.0.1.gem
 ```
