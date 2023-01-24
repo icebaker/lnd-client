@@ -11,6 +11,6 @@ group :test, :development do
   gem 'pry-byebug', '~> 3.10', '>= 3.10.1'
   gem 'rainbow', '~> 3.1', '>= 3.1.1'
   gem 'rake', '~> 13.0', '>= 13.0.6'
-  gem 'rubocop', '~> 1.43'
+  gem 'rubocop', '~> 1.44'
   gem 'rubocop-rake', '~> 0.6.0'
 end
