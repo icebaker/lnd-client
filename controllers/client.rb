@@ -21,11 +21,11 @@ class ClientController
     GRPC::SERVICES.include?(service_key) || super
   end
 
-  def method_missing(method_name, *_args)
+  def method_missing(method_name, *args)
     service_key = method_name.to_sym
 
     raise ArgumentError, "Method `#{method_name}` doesn't exist." unless GRPC::SERVICES.include?(service_key)
 
-    @services[service_key] ||= ServiceController.new(self, GRPC::SERVICES[service_key])
+    @services[service_key] ||= ServiceController.new(self, GRPC::SERVICES[service_key], *args)
   end
 end

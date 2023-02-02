@@ -3,6 +3,7 @@
 > ⚠️ Warning: Early-stage, breaking changes are expected.
 
 - [Usage](#usage)
+  - [Channel Arguments](#channel-arguments)
   - [Documentation](#documentation)
 - [Development](#development)
   - [Upgrading gRPC Proto Files](#upgrading-grpc-proto-files)
@@ -48,6 +49,29 @@ end
 client.router.subscribe_htlc_events do |data|
   puts data.inspect # => { ... }
 end
+```
+
+### Channel Arguments
+
+```ruby
+require 'lnd-client'
+
+puts LNDClient.version # => 0.0.2
+
+client = LNDClient.new(
+  certificate_path: '/lnd/tls.cert',
+  macaroon_path: '/lnd/data/chain/bitcoin/mainnet/admin.macaroon',
+  socket_address: '127.0.0.1:10009'
+)
+
+client.lightning(
+  channel_args: { 'grpc.max_receive_message_length' => 1024 * 1024 * 50 }
+)
+
+graph = client.lightning.describe_graph
+
+graph.nodes # => [...]
+graph.edges # => [...]
 ```
 
 ### Documentation

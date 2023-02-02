@@ -5,11 +5,15 @@ require_relative './documentation'
 class ServiceController
   attr_reader :doc, :service
 
-  def initialize(client, rpc)
+  def initialize(client, rpc, params = {})
     @client = client
     @rpc = rpc
     @service = rpc.const_get(:Service)
-    @stub = rpc.const_get(:Stub).new(client.config.socket_address, client.config.credentials)
+    @stub = rpc.const_get(:Stub).new(
+      client.config.socket_address,
+      client.config.credentials,
+      **params
+    )
     @doc = DocumentationController.new(self)
   end
 

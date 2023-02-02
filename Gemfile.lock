@@ -1,3 +1,9 @@
+PATH
+  remote: .
+  specs:
+    lnd-client (0.0.2)
+      grpc (~> 1.51)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -7,10 +13,9 @@ GEM
     google-protobuf (3.21.12)
     googleapis-common-protos-types (1.5.0)
       google-protobuf (~> 3.14)
-    grpc (1.50.0)
+    grpc (1.51.0)
       google-protobuf (~> 3.21)
       googleapis-common-protos-types (~> 1.0)
-    grpc-tools (1.50.0)
     json (2.6.3)
     method_source (1.0.0)
     parallel (1.22.1)
@@ -23,7 +28,6 @@ GEM
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
     rainbow (3.1.1)
-    rake (13.0.6)
     regexp_parser (2.6.2)
     rexml (3.2.5)
     rubocop (1.44.0)
@@ -47,16 +51,10 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  grpc (~> 1.50)
-  grpc-tools (~> 1.50)
+  lnd-client!
   pry-byebug (~> 3.10, >= 3.10.1)
-  rainbow (~> 3.1, >= 3.1.1)
-  rake (~> 13.0, >= 13.0.6)
   rubocop (~> 1.44)
   rubocop-rake (~> 0.6.0)
-
-RUBY VERSION
-   ruby 3.2.0p0
 
 BUNDLED WITH
    2.4.4
