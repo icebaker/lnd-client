@@ -87,7 +87,7 @@ client = LNDClient.new(
   socket_address: '127.0.0.1:10009'
 )
 
-client.doc.services # => ['lightning']
+client.doc.services # => ['lightning', 'router']
 
 client.lightning.doc.available_methods # =>
 # ['abandon_channel',
