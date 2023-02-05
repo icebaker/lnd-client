@@ -5,6 +5,6 @@ require_relative './controllers/grpc_generator'
 namespace :grpc do
   desc 'Upgrade lnd Protocol Buffers for gGRPC'
   task :upgrade do
-    GrpcGeneratorController.upgrade!
+    LNDClientInternal::GrpcGeneratorController.upgrade!
   end
 end

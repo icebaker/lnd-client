@@ -5,10 +5,10 @@ require_relative '../../static/spec'
 
 module LNDClient
   def self.new(params)
-    ClientController.new(params)
+    LNDClientInternal::ClientController.new(params)
   end
 
   def self.version
-    Static::SPEC[:version]
+    LNDClientInternal::Static::SPEC[:version]
   end
 end

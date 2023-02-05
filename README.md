@@ -2,6 +2,8 @@
 
 > ⚠️ Warning: Early-stage, breaking changes are expected.
 
+This is a low-level client library. For a better experience, you may want to check out the [Lighstorm](https://github.com/icebaker/lighstorm) abstraction.
+
 - [Usage](#usage)
   - [Channel Arguments](#channel-arguments)
   - [Documentation](#documentation)
