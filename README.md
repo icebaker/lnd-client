@@ -16,13 +16,13 @@ This is a low-level client library. For a better experience, you may want to che
 Add to your `Gemfile`:
 
 ```ruby
-gem 'lnd-client', '~> 0.0.4'
+gem 'lnd-client', '~> 0.0.5'
 ```
 
 ```ruby
 require 'lnd-client'
 
-puts LNDClient.version # => 0.0.4
+puts LNDClient.version # => 0.0.5
 
 client = LNDClient.new(
   certificate_path: '/lnd/tls.cert',
@@ -58,7 +58,7 @@ end
 ```ruby
 require 'lnd-client'
 
-puts LNDClient.version # => 0.0.4
+puts LNDClient.version # => 0.0.5
 
 client = LNDClient.new(
   certificate_path: '/lnd/tls.cert',
@@ -81,7 +81,7 @@ graph.edges # => [...]
 ```ruby
 require 'lnd-client'
 
-puts LNDClient.version # => 0.0.4
+puts LNDClient.version # => 0.0.5
 
 client = LNDClient.new(
   certificate_path: '/lnd/tls.cert',
@@ -148,5 +148,5 @@ gem build lnd-client.gemspec
 
 gem signin
 
-gem push lnd-client-0.0.4.gem
+gem push lnd-client-0.0.5.gem
 ```
