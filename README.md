@@ -1,11 +1,11 @@
-# Ruby _Lightning Network Daemon_ Client
+# lnd-client
 
-> ⚠️ Warning: Early-stage, breaking changes are expected.
+> Ruby Lightning Network Daemon Client: Straightforward access to [lnd](https://github.com/lightningnetwork/lnd) [gRPC API](https://lightning.engineering/api-docs/api/lnd/#grpc)
 
 This is a low-level client library. For a better experience, you may want to check out the [Lighstorm](https://github.com/icebaker/lighstorm) abstraction.
 
 - [Usage](#usage)
-  - [Documentation](#documentation)
+  - [Documentation](https://icebaker.github.io/lnd-client)
 - [Development](#development)
   - [Upgrading gRPC Proto Files](#upgrading-grpc-proto-files)
   - [Generating Documentation](#generating-documentation)
@@ -53,9 +53,7 @@ client.router.subscribe_htlc_events do |data|
 end
 ```
 
-### Documentation
-
-Check the [full documentation](#documentation).
+Check the [full documentation](https://icebaker.github.io/lnd-client).
 
 ## Development
 

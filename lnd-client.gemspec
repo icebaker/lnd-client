@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.summary = LNDClientInternal::Static::SPEC[:summary]
   spec.description = LNDClientInternal::Static::SPEC[:description]
 
-  spec.homepage = LNDClientInternal::Static::SPEC[:github]
+  spec.homepage = LNDClientInternal::Static::SPEC[:documentation]
 
   spec.license = LNDClientInternal::Static::SPEC[:license]
 
