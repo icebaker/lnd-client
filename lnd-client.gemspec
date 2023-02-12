@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject do |f|
-      f.match(%r{\A(?:test|spec|features)/})
+      f.match(%r{\A(?:test|spec|docs|features)/})
     end
   end
 

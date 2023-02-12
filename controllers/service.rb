@@ -15,7 +15,7 @@ module LNDClientInternal
         client.config.credentials,
         **params
       )
-      @doc = LNDClientInternal::DocumentationController.new(self)
+      @doc = LNDClientInternal::DocumentationController.new(@service)
     end
 
     def call!(method_key, desc, *args, &block)

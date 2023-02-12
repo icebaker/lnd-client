@@ -5,10 +5,10 @@
 This is a low-level client library. For a better experience, you may want to check out the [Lighstorm](https://github.com/icebaker/lighstorm) abstraction.
 
 - [Usage](#usage)
-  - [Channel Arguments](#channel-arguments)
   - [Documentation](#documentation)
 - [Development](#development)
   - [Upgrading gRPC Proto Files](#upgrading-grpc-proto-files)
+  - [Generating Documentation](#generating-documentation)
   - [Publish to RubyGems](#publish-to-rubygems)
 
 ## Usage
@@ -53,71 +53,9 @@ client.router.subscribe_htlc_events do |data|
 end
 ```
 
-### Channel Arguments
-
-```ruby
-require 'lnd-client'
-
-puts LNDClient.version # => 0.0.5
-
-client = LNDClient.new(
-  certificate_path: '/lnd/tls.cert',
-  macaroon_path: '/lnd/data/chain/bitcoin/mainnet/admin.macaroon',
-  socket_address: '127.0.0.1:10009'
-)
-
-client.lightning(
-  channel_args: { 'grpc.max_receive_message_length' => 1024 * 1024 * 50 }
-)
-
-graph = client.lightning.describe_graph
-
-graph.nodes # => [...]
-graph.edges # => [...]
-```
-
 ### Documentation
 
-```ruby
-require 'lnd-client'
-
-puts LNDClient.version # => 0.0.5
-
-client = LNDClient.new(
-  certificate_path: '/lnd/tls.cert',
-  macaroon_path: '/lnd/data/chain/bitcoin/mainnet/admin.macaroon',
-  socket_address: '127.0.0.1:10009'
-)
-
-client.doc.services # => ['lightning', 'router']
-
-client.lightning.doc.available_methods # =>
-# ['abandon_channel',
-#  'add_invoice',
-#  'bake_macaroon',
-#  'batch_open_channel',
-#  'channel_acceptor',
-#  'channel_balance',
-#  'check_macaroon_permissions',
-#  'close_channel',
-#  'closed_channels',
-#  # ...
-#  'get_node_info'
-# ]
-
-client.lightning.doc.describe(:get_node_info) # =>
-# { method: 'get_node_info',
-#    input: { pub_key: '', include_channels: false},
-#   output: { node: nil, num_channels: 0, total_capacity: 0, channels: []}}
-
-client.lightning.doc.grpc(:get_node_info)
-# #<struct GRPC::RpcDesc
-#  name=:GetNodeInfo,
-#  input=Lnrpc::NodeInfoRequest,
-#  output=Lnrpc::NodeInfo,
-#  marshal_method=:encode,
-#  unmarshal_method=:decode>
-```
+Check the [full documentation](#documentation).
 
 ## Development
 
@@ -141,6 +79,17 @@ rubocop -A
 ```sh
 bundle exec rake grpc:upgrade
 ```
+
+### Generating Documentation
+
+```sh
+bundle exec rake grpc:docs
+
+npm i docsify-cli -g
+
+docsify serve ./docs
+```
+
 ### Publish to RubyGems
 
 ```sh

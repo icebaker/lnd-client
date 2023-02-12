@@ -28,6 +28,7 @@ GEM
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
     rainbow (3.1.1)
+    rake (13.0.6)
     regexp_parser (2.7.0)
     rexml (3.2.5)
     rubocop (1.45.1)
@@ -53,8 +54,10 @@ PLATFORMS
 DEPENDENCIES
   lnd-client!
   pry-byebug (~> 3.10, >= 3.10.1)
+  rake (~> 13.0, >= 13.0.6)
   rubocop (~> 1.45, >= 1.45.1)
   rubocop-rake (~> 0.6.0)
+  ruby-progressbar (~> 1.8, >= 1.8.1)
 
 BUNDLED WITH
    2.4.4
