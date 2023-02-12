@@ -1583,7 +1583,7 @@ _________________
 <center>
   lnd-client 0.0.5
   |
-  <a href="https://github.com/icebaker/lnd-client" target="_blank">GitHub</a>
+  <a href="https://github.com/icebaker/lnd-client" rel="noopener noreferrer" target="_blank">GitHub</a>
   |
-  <a href="https://rubygems.org/gems/lnd-client" target="_blank">RubyGems</a>
+  <a href="https://rubygems.org/gems/lnd-client" rel="noopener noreferrer" target="_blank">RubyGems</a>
 </center>
