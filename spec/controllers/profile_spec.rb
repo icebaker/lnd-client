@@ -46,13 +46,13 @@ RSpec.describe LNDClientInternal::Profile do
         VCR.reel.replay('lightning.wallet_balance.total_balance', as: 'alice/path') do
           described_class.instance.as('alice/path').lightning.wallet_balance.total_balance
         end
-      ).to eq(483526)
+      ).to eq(483_526)
 
       expect(
         VCR.reel.replay('lightning.wallet_balance.total_balance', as: 'alice') do
           described_class.instance.as('alice').lightning.wallet_balance.total_balance
         end
-      ).to eq(483526)
+      ).to eq(483_526)
 
       expect(
         VCR.reel.replay('lightning.wallet_balance.total_balance', as: 'bob') do

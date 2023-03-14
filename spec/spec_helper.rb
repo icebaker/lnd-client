@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'rainbow'
+
+require 'dotenv/load'
+
 require_relative './helpers/vcr'
 
 RSpec.configure do |config|
@@ -34,7 +38,7 @@ RSpec.configure do |config|
         print Rainbow("\n\nWarning: #{unused_files.size} unused test data files were found.").magenta
 
         if $stdout.tty? && !unused_files.empty? &&
-           ENV.fetch('LND_CLIENT_UNUSED_TEST_DATA', 'false') == 'true'
+           ENV.fetch('LND_CLIENT_DELETE_UNUSED_TEST_DATA', 'false') == 'true'
 
           puts "\nDeleting unused files..."
           unused_files.each do |path|

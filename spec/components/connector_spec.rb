@@ -65,7 +65,7 @@ RSpec.describe LNDClientInternal::Connector do
       )
 
       expect(described_class.instance.for('alice/path').keys.sort).to eq(
-        [:address, :certificate, :credentials, :host, :macaroon, :port]
+        %i[address certificate credentials host macaroon port]
       )
 
       expect(
