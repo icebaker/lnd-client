@@ -12,4 +12,6 @@ Naming/FileName:
   Exclude:
     - 'ports/dsl/lnd-client.rb'
 
-require: rubocop-rake
+require:
+  - rubocop-rake
+  - rubocop-rspec

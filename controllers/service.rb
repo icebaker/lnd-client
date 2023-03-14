@@ -10,9 +10,10 @@ module LNDClientInternal
       @client = client
       @rpc = rpc
       @service = rpc.const_get(:Service)
+      # require 'pry'; binding.pry
       @stub = rpc.const_get(:Stub).new(
-        client.config.socket_address,
-        client.config.credentials,
+        client.connection[:address],
+        client.connection[:credentials],
         **params
       )
       @doc = LNDClientInternal::DocumentationController.new(@service)
@@ -21,7 +22,7 @@ module LNDClientInternal
     def call!(method_key, desc, *args, &block)
       @stub.method(method_key).call(
         desc.input.new(*args),
-        { metadata: { macaroon: @client.config.macaroon } },
+        { metadata: { macaroon: @client.connection[:macaroon] } },
         &block
       )
     end
