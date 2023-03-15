@@ -10,13 +10,13 @@ This is a low-level client library. For a better experience, you may want to che
 
 Add to your `Gemfile`:
 ```ruby
-gem 'lnd-client', '~> 0.0.5'
+gem 'lnd-client', '~> 0.0.6'
 ```
 
 ```ruby
 require 'lnd-client'
 
-puts LNDClient.version # => 0.0.5
+puts LNDClient.version # => 0.0.6
 
 client = LNDClient.new(
   'lndconnect://127.0.0.1:10009?cert=MIICJz...JBEERQ&macaroon=AgEDbG...45ukJ4'
@@ -53,7 +53,7 @@ end
 ```ruby
 require 'lnd-client'
 
-puts LNDClient.version # => 0.0.5
+puts LNDClient.version # => 0.0.6
 
 client = LNDClient.new(
   'lndconnect://127.0.0.1:10009?cert=MIICJz...JBEERQ&macaroon=AgEDbG...45ukJ4'
@@ -287,7 +287,7 @@ gem build lnd-client.gemspec
 
 gem signin
 
-gem push lnd-client-0.0.5.gem
+gem push lnd-client-0.0.6.gem
 ```
 
 # Services
@@ -1760,7 +1760,7 @@ client.router.x_import_mission_control(
 _________________
 
 <center>
-  lnd-client 0.0.5
+  lnd-client 0.0.6
   |
   <a href="https://github.com/icebaker/lnd-client" rel="noopener noreferrer" target="_blank">GitHub</a>
   |
