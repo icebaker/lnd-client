@@ -58,6 +58,8 @@ Check the [full documentation](https://icebaker.github.io/lnd-client).
 
 ## Development
 
+Copy the `.env.example` file to `.env` and provide the required data.
+
 ```ruby
 # Gemfile
 gem 'lnd-client', path: '/home/user/lnd-client'

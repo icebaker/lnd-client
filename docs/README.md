@@ -187,7 +187,7 @@ graph.edges # => [...]
 Multiclient allows you to establish connections with multiple nodes and effortlessly switch between them without needing to create and manage individual client instances.
 
 ```ruby
-LNDClient.add!(
+LNDClient.add_connection!(
   'alice',
   'lndconnect://127.0.0.1:10009?cert=MIICJz...JBEERQ&macaroon=AgEDbG...45ukJ4'
 )
@@ -244,6 +244,51 @@ tlsextradomain=<your_domain_name>
 5. Update your LND client configuration with the new certificate.
 
 Choose the option that best suits your needs and environment while considering security implications.
+
+# Development
+
+Copy the `.env.example` file to `.env` and provide the required data.
+
+```ruby
+# Gemfile
+gem 'lnd-client', path: '/home/user/lnd-client'
+
+# demo.rb
+require 'lnd-client'
+
+puts LNDClient.version
+```
+
+```sh
+bundle
+rubocop -A
+```
+
+## Upgrading gRPC Proto Files
+
+```sh
+bundle exec rake grpc:upgrade
+```
+
+## Generating Documentation
+
+```sh
+bundle exec rake grpc:docs
+
+npm i docsify-cli -g
+
+docsify serve ./docs
+```
+
+## Publish to RubyGems
+
+```sh
+gem build lnd-client.gemspec
+
+gem signin
+
+gem push lnd-client-0.0.5.gem
+```
 
 # Services
 
