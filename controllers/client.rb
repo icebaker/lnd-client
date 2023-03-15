@@ -1,19 +1,21 @@
 # frozen_string_literal: true
 
 require_relative '../components/grpc'
-require_relative 'config'
+
 require_relative 'service'
 
 module LNDClientInternal
   class ClientController
-    attr_reader :config, :doc
+    attr_reader :connection, :doc
 
-    def initialize(options)
-      @config = LNDClientInternal::ConfigController.new(self, options)
+    def initialize(connection)
+      @connection = connection
       @services = {}
 
       doc = Struct.new(:services)
       @doc = doc.new(LNDClientInternal::GRPC::SERVICES.keys.map(&:to_s))
+
+      lightning(**connection[:lightning]) if connection[:lightning]
     end
 
     def respond_to_missing?(method_name, include_private = false)

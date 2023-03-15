@@ -1,4 +1,4 @@
-# lnd-client
+# lnd-client [![Gem Version](https://badge.fury.io/rb/lnd-client.svg)](https://badge.fury.io/rb/lnd-client) ![RSpec Tests Status](https://github.com/icebaker/lnd-client/actions/workflows/ruby-rspec-tests.yml/badge.svg)
 
 Ruby Lightning Network Daemon Client: Straightforward access to [lnd](https://github.com/lightningnetwork/lnd) [gRPC API](https://lightning.engineering/api-docs/api/lnd/#grpc)
 
@@ -25,20 +25,21 @@ require 'lnd-client'
 puts LNDClient.version # => 0.0.5
 
 client = LNDClient.new(
-  certificate_path: '/lnd/tls.cert',
-  macaroon_path: '/lnd/data/chain/bitcoin/mainnet/admin.macaroon',
-  socket_address: '127.0.0.1:10009'
+  'lndconnect://127.0.0.1:10009?cert=MIICJz...JBEERQ&macaroon=AgEDbG...45ukJ4'
 )
 
 client.lightning.wallet_balance.total_balance # => 101527
 
 client.lightning.wallet_balance.to_h # =>
-# {:total_balance=>101527,
-#  :confirmed_balance=>101527,
-#  :unconfirmed_balance=>0,
-#  :locked_balance=>0,
-#  :reserved_balance_anchor_chan=>20000,
-#  :account_balance=>{"default"=>{:confirmed_balance=>101527, :unconfirmed_balance=>0}}}
+# { total_balance: 101_527,
+#   confirmed_balance: 101_527,
+#   unconfirmed_balance: 0,
+#   locked_balance: 0,
+#   reserved_balance_anchor_chan: 20_000,
+#   account_balance: {
+#     'default' => {
+#       confirmed_balance: 101_527,
+#       unconfirmed_balance: 0 } } }
 
 client.lightning.get_node_info(
   pub_key: '02d3c80335a8ccb2ed364c06875f32240f36f7edb37d80f8dbe321b4c364b6e997'

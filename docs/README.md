@@ -19,9 +19,7 @@ require 'lnd-client'
 puts LNDClient.version # => 0.0.5
 
 client = LNDClient.new(
-  certificate_path: '/lnd/tls.cert',
-  macaroon_path: '/lnd/data/chain/bitcoin/mainnet/admin.macaroon',
-  socket_address: '127.0.0.1:10009'
+  'lndconnect://127.0.0.1:10009?cert=MIICJz...JBEERQ&macaroon=AgEDbG...45ukJ4'
 )
 
 client.lightning.wallet_balance.total_balance # => 101527
@@ -50,29 +48,6 @@ client.router.subscribe_htlc_events do |data|
 end
 ```
 
-## Channel Arguments
-
-```ruby
-require 'lnd-client'
-
-puts LNDClient.version # => 0.0.5
-
-client = LNDClient.new(
-  certificate_path: '/lnd/tls.cert',
-  macaroon_path: '/lnd/data/chain/bitcoin/mainnet/admin.macaroon',
-  socket_address: '127.0.0.1:10009'
-)
-
-client.lightning(
-  channel_args: { 'grpc.max_receive_message_length' => 1024 * 1024 * 50 }
-)
-
-graph = client.lightning.describe_graph
-
-graph.nodes # => [...]
-graph.edges # => [...]
-```
-
 ## Runtime Documentation
 
 ```ruby
@@ -81,9 +56,7 @@ require 'lnd-client'
 puts LNDClient.version # => 0.0.5
 
 client = LNDClient.new(
-  certificate_path: '/lnd/tls.cert',
-  macaroon_path: '/lnd/data/chain/bitcoin/mainnet/admin.macaroon',
-  socket_address: '127.0.0.1:10009'
+  'lndconnect://127.0.0.1:10009?cert=MIICJz...JBEERQ&macaroon=AgEDbG...45ukJ4'
 )
 
 client.doc.services # => ['lightning', 'router']
@@ -115,6 +88,163 @@ client.lightning.doc.grpc(:get_node_info)
 #  marshal_method=:encode,
 #  unmarshal_method=:decode>
 ```
+
+## Connecting
+
+### lndconnect
+
+Read more about [lnd connect URL](https://github.com/LN-Zap/lndconnect/blob/master/lnd_connect_uri.md).
+
+```ruby
+require 'lnd-client'
+
+client = LNDClient.new(
+  'lndconnect://127.0.0.1:10009?cert=MIICJz...JBEERQ&macaroon=AgEDbG...45ukJ4'
+)
+```
+
+### File Path
+
+```ruby
+require 'lnd-client'
+
+client = LNDClient.new(
+  address: '127.0.0.1:10009',
+  certificate_path: '/lnd/tls.cert',
+  macaroon_path: '/lnd/data/chain/bitcoin/mainnet/admin.macaroon'
+)
+```
+
+### Base64
+
+```ruby
+require 'lnd-client'
+
+client = LNDClient.new(
+  address: '127.0.0.1:10009',
+  certificate: 'LS0tLS1CRU...UtLS0tLQo=',
+  macaroon: 'AgEDbG5kAv...inv45ukJ4='
+)
+```
+
+### Hex
+
+```ruby
+require 'lnd-client'
+
+client = LNDClient.new(
+  address: '127.0.0.1:10009',
+  certificate: '2d2d2d2d2d...2d2d2d2d0a',
+  macaroon: '0201036c6e...bf8e6e909e'
+)
+```
+
+### Raw
+
+```ruby
+require 'lnd-client'
+
+client = LNDClient.new(
+  address: '127.0.0.1:10009',
+  certificate: File.read('/lnd/tls.cert'),
+  macaroon: File.read('/lnd/data/chain/bitcoin/mainnet/admin.macaroon')
+)
+```
+
+## Channel Arguments
+
+Read more about `GRPC::ResourceExhausted`: [Receive Large Responses](https://github.com/lightningnetwork/lnd/blob/master/docs/grpc/ruby.md#receive-large-responses)
+
+```ruby
+require 'lnd-client'
+
+# lndconnect
+client = LNDClient.new(
+  'lndconnect://127.0.0.1:10009?cert=MIICJz...JBEERQ&macaroon=AgEDbG...45ukJ4',
+  lightning: {
+    channel_args: { 'grpc.max_receive_message_length' => 1024 * 1024 * 50 }
+  }
+)
+
+# Base64
+client = LNDClient.new(
+  address: '127.0.0.1:10009',
+  certificate: 'LS0tLS1CRU...UtLS0tLQo=',
+  macaroon: 'AgEDbG5kAv...inv45ukJ4=',
+  lightning: {
+    channel_args: { 'grpc.max_receive_message_length' => 1024 * 1024 * 50 }
+  }
+)
+
+graph = client.lightning.describe_graph
+
+graph.nodes # => [...]
+graph.edges # => [...]
+```
+
+## Multiclient
+
+Multiclient allows you to establish connections with multiple nodes and effortlessly switch between them without needing to create and manage individual client instances.
+
+```ruby
+LNDClient.add!(
+  'alice',
+  'lndconnect://127.0.0.1:10009?cert=MIICJz...JBEERQ&macaroon=AgEDbG...45ukJ4'
+)
+
+LNDClient.add_connection!(
+  'bob',
+  address: '127.0.0.1:10009',
+  certificate: 'LS0tLS1CRU...UtLS0tLQo=',
+  macaroon: 'AgEDbG5kAv...inv45ukJ4=',
+  lightning: {
+    channel_args: { 'grpc.max_receive_message_length' => 1024 * 1024 * 50 }
+  }
+)
+
+LNDClient.as('alice').lightning.wallet_balance.total_balance
+LNDClient.as('bob').lightning.wallet_balance.total_balance
+
+LNDClient.connections # => ['alice', 'bob']
+
+LNDClient.remove_connections!('bob').lightning.wallet_balance.total_balance
+
+LNDClient.connections # => ['alice']
+```
+
+## Docker and Remote Access
+
+To connect to an LND node through a Docker container or remote host, you may need to adjust your certificate settings. Follow these steps:
+
+1. Stop your LND node.
+
+2. Remove or backup existing certificate files (`tls.cert` and `tls.key`) in the LND directory.
+
+3. Modify `lnd.conf` to include the relevant `tlsextraip` and/or `tlsextradomain` settings:
+
+Option A: Accept any IP or domain (Warning: high security risk):
+
+```conf
+tlsextraip=0.0.0.0
+```
+
+Option B: Accept only your Docker host (172.17.0.1):
+```conf
+tlsextraip=172.17.0.1
+```
+
+Option C: Accept a specific remote domain and host:
+```config
+tlsextraip=<your_remote_host_ip>
+tlsextradomain=<your_domain_name>
+```
+
+4. Save and restart your LND node. New tls.cert and tls.key files will be generated.
+
+5. Update your LND client configuration with the new certificate.
+
+Choose the option that best suits your needs and environment while considering security implications.
+
 # Services
 
 <!-- [INJECT:GRP:DOCS] -->

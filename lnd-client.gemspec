@@ -20,6 +20,8 @@ Gem::Specification.new do |spec|
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = LNDClientInternal::Static::SPEC[:github]
+  spec.metadata['documentation_uri'] = LNDClientInternal::Static::SPEC[:documentation]
+  spec.metadata['bug_tracker_uri'] = LNDClientInternal::Static::SPEC[:issues]
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject do |f|
