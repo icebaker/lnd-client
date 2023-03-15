@@ -10,7 +10,6 @@ module LNDClientInternal
       @client = client
       @rpc = rpc
       @service = rpc.const_get(:Service)
-      # require 'pry'; binding.pry
       @stub = rpc.const_get(:Stub).new(
         client.connection[:address],
         client.connection[:credentials],

@@ -106,6 +106,6 @@ module VCR
 
     return path.join('/') if partial
 
-    "spec/data/#{kind}/#{path.join('/')}.bin"
+    "spec/data/#{kind}/#{path.join('/')}.bin".gsub(%r{/{2,}}, '/')
   end
 end

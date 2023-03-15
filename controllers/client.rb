@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../components/grpc'
+
 require_relative 'service'
 
 module LNDClientInternal
@@ -13,6 +14,8 @@ module LNDClientInternal
 
       doc = Struct.new(:services)
       @doc = doc.new(LNDClientInternal::GRPC::SERVICES.keys.map(&:to_s))
+
+      lightning(**connection[:lightning]) if connection[:lightning]
     end
 
     def respond_to_missing?(method_name, include_private = false)
