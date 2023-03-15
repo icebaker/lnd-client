@@ -207,7 +207,7 @@ LNDClient.as('bob').lightning.wallet_balance.total_balance
 
 LNDClient.connections # => ['alice', 'bob']
 
-LNDClient.remove_connections!('bob').lightning.wallet_balance.total_balance
+LNDClient.remove_connection!('bob').lightning.wallet_balance.total_balance
 
 LNDClient.connections # => ['alice']
 ```
