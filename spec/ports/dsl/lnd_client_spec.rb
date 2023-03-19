@@ -184,7 +184,7 @@ RSpec.describe LNDClient do
       )
 
       expect(described_class.as('alice').connection.keys).to eq(
-        %i[host port certificate macaroon address credentials]
+        %i[connect host port certificate macaroon address credentials]
       )
 
       expect(described_class.as('bob').connection.keys).to eq(
@@ -196,7 +196,7 @@ RSpec.describe LNDClient do
       )
 
       expect(described_class.as('carol').connection.keys).to eq(
-        %i[host port certificate macaroon address lightning credentials]
+        %i[connect host port certificate macaroon address lightning credentials]
       )
 
       expect(described_class.as('carol').connection[:lightning]).to eq(

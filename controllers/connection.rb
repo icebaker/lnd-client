@@ -11,12 +11,21 @@ require_relative '../models/errors'
 module LNDClientInternal
   class Connection
     def self.validate_params!(connection)
-      raise LNDClient::Errors::TooManyArgumentsError if connection.key?(:address) && connection.key?(:host)
-      raise LNDClient::Errors::TooManyArgumentsError if connection.key?(:address) && connection.key?(:port)
-      if connection.key?(:certificate_path) && connection.key?(:certificate)
+      if connection.key?(:address) && !connection[:address].nil? && connection.key?(:host) && connection[:host].nil?
         raise LNDClient::Errors::TooManyArgumentsError
       end
-      raise LNDClient::Errors::TooManyArgumentsError if connection.key?(:macaroon_path) && connection.key?(:macaroon)
+
+      if connection.key?(:address) && !connection[:address].nil? && connection.key?(:port) && !connection[:port].nil?
+        raise LNDClient::Errors::TooManyArgumentsError
+      end
+
+      if connection.key?(:certificate_path) && !connection[:certificate_path].nil? && connection.key?(:certificate) && !connection[:certificate].nil?
+        raise LNDClient::Errors::TooManyArgumentsError
+      end
+
+      if connection.key?(:macaroon_path) && !connection[:macaroon_path].nil? && connection.key?(:macaroon) && !connection[:macaroon].nil?
+        raise LNDClient::Errors::TooManyArgumentsError
+      end
     end
 
     def self.expand(*params, &vcr)
@@ -90,6 +99,7 @@ module LNDClientInternal
       certificate = "-----BEGIN CERTIFICATE-----\n#{certificate.gsub(/(.{64})/, "\\1\n")}\n-----END CERTIFICATE-----\n"
 
       {
+        connect: params.first,
         host: host,
         port: port,
         certificate: certificate,
