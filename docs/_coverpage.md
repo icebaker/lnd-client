@@ -4,7 +4,7 @@
 
 - Straightforward access to [lnd](https://github.com/lightningnetwork/lnd) [gRPC API](https://lightning.engineering/api-docs/api/lnd/#grpc)
 
-0.0.6
+0.0.7
 
 [Documentation](README)
 [GitHub](https://github.com/icebaker/lnd-client)

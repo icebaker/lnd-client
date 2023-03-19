@@ -16,13 +16,13 @@ This is a low-level client library. For a better experience, you may want to che
 Add to your `Gemfile`:
 
 ```ruby
-gem 'lnd-client', '~> 0.0.6'
+gem 'lnd-client', '~> 0.0.7'
 ```
 
 ```ruby
 require 'lnd-client'
 
-puts LNDClient.version # => 0.0.6
+puts LNDClient.version # => 0.0.7
 
 client = LNDClient.new(
   'lndconnect://127.0.0.1:10009?cert=MIICJz...JBEERQ&macaroon=AgEDbG...45ukJ4'
@@ -98,5 +98,5 @@ gem build lnd-client.gemspec
 
 gem signin
 
-gem push lnd-client-0.0.6.gem
+gem push lnd-client-0.0.7.gem
 ```

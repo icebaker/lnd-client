@@ -4,7 +4,7 @@ module LNDClientInternal
   module Static
     SPEC = {
       name: 'lnd-client',
-      version: '0.0.6',
+      version: '0.0.7',
       author: 'icebaker',
       summary: 'Ruby Lightning Network Daemon (lnd) Client',
       description: 'Ruby Lightning Network Daemon (lnd) Client',

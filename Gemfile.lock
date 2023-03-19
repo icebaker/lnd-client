@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lnd-client (0.0.6)
+    lnd-client (0.0.7)
       grpc (~> 1.52)
 
 GEM
