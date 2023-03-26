@@ -96,6 +96,9 @@ module LNDClientInternal
       certificate = params['cert'].tr('-_', '+/')
       macaroon = Base64.urlsafe_decode64(params['macaroon'])
 
+      padding_needed = 4 - (certificate.length % 4)
+      certificate += '=' * padding_needed
+
       certificate = "-----BEGIN CERTIFICATE-----\n#{certificate.gsub(/(.{64})/, "\\1\n")}\n-----END CERTIFICATE-----\n"
 
       {
