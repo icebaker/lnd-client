@@ -6,7 +6,7 @@ This is a low-level client library. For a better experience, you may want to che
 
 - [Usage](#usage)
   - [Documentation](https://icebaker.github.io/lnd-client)
-- [Available Supported Services][#available-supported-services]
+- [Available Supported Services](#available-supported-services)
 - [Development](#development)
   - [Upgrading gRPC Proto Files](#upgrading-grpc-proto-files)
   - [Generating Documentation](#generating-documentation)
@@ -17,13 +17,13 @@ This is a low-level client library. For a better experience, you may want to che
 Add to your `Gemfile`:
 
 ```ruby
-gem 'lnd-client', '~> 0.0.8'
+gem 'lnd-client', '~> 0.0.9'
 ```
 
 ```ruby
 require 'lnd-client'
 
-puts LNDClient.version # => 0.0.8
+puts LNDClient.version # => 0.0.9
 
 client = LNDClient.new(
   'lndconnect://127.0.0.1:10009?cert=MIICJz...JBEERQ&macaroon=AgEDbG...45ukJ4'
@@ -118,5 +118,5 @@ gem build lnd-client.gemspec
 
 gem signin
 
-gem push lnd-client-0.0.8.gem
+gem push lnd-client-0.0.9.gem
 ```
