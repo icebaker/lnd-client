@@ -3,8 +3,8 @@
 
 require 'google/protobuf'
 
-require_relative 'lightning_pb'
-require_relative 'signrpc/signer_pb'
+require_relative '../lightning_pb'
+require_relative '../signrpc/signer_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("walletrpc/walletkit.proto", :syntax => :proto3) do

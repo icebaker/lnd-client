@@ -2,7 +2,7 @@
 # Source: neutrinorpc/neutrino.proto for package 'neutrinorpc'
 
 require 'grpc'
-require_relative 'neutrinorpc/neutrino_pb'
+require_relative './neutrino_pb'
 
 module Neutrinorpc
   module NeutrinoKit

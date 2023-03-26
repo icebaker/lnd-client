@@ -2,7 +2,7 @@
 # Source: chainrpc/chainkit.proto for package 'chainrpc'
 
 require 'grpc'
-require_relative 'chainrpc/chainkit_pb'
+require_relative './chainkit_pb'
 
 module Chainrpc
   module ChainKit

@@ -2,7 +2,7 @@
 # Source: walletrpc/walletkit.proto for package 'walletrpc'
 
 require 'grpc'
-require_relative 'walletrpc/walletkit_pb'
+require_relative './walletkit_pb'
 
 module Walletrpc
   module WalletKit

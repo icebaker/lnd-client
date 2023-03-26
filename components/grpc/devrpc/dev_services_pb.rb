@@ -2,7 +2,7 @@
 # Source: devrpc/dev.proto for package 'devrpc'
 
 require 'grpc'
-require_relative 'devrpc/dev_pb'
+require_relative './dev_pb'
 
 module Devrpc
   module Dev

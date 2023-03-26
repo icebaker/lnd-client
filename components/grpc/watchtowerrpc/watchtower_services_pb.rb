@@ -2,7 +2,7 @@
 # Source: watchtowerrpc/watchtower.proto for package 'watchtowerrpc'
 
 require 'grpc'
-require_relative 'watchtowerrpc/watchtower_pb'
+require_relative './watchtower_pb'
 
 module Watchtowerrpc
   module Watchtower
