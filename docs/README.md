@@ -738,7 +738,8 @@ Output:
   chains: [],
   uris: [],
   features: {},
-  require_htlc_interceptor: false }
+  require_htlc_interceptor: false,
+  store_final_htlc_resolutions: false }
 ```
 
 ### get_network_info
@@ -853,7 +854,8 @@ client.lightning.list_channels(
     inactive_only: false,
     public_only: false,
     private_only: false,
-    peer: '' }
+    peer: '',
+    peer_alias_lookup: false }
 )
 ```
 
@@ -966,12 +968,12 @@ Output:
 { utxos: [] }
 ```
 
-### lookup_htlc
+### lookup_htlc_resolution
 
-[lightning.engineering/lightning/lookup-htlc](https://lightning.engineering/api-docs/api/lnd/lightning/lookup-htlc/index.html)
+[lightning.engineering/lightning/lookup-htlc-resolution](https://lightning.engineering/api-docs/api/lnd/lightning/lookup-htlc-resolution/index.html)
 
 ```ruby
-client.lightning.lookup_htlc(
+client.lightning.lookup_htlc_resolution(
   { chan_id: 0,
     htlc_index: 0 }
 )

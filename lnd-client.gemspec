@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['ports/dsl']
 
-  spec.add_dependency 'grpc', '~> 1.52'
+  spec.add_dependency 'grpc', '~> 1.53'
 
   spec.metadata['rubygems_mfa_required'] = 'true'
 end

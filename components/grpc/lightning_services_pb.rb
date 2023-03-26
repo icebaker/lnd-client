@@ -433,7 +433,11 @@ module Lnrpc
       # their confirmed SCID (if it exists) and/or the base SCID (in the case of
       # zero conf).
       rpc :ListAliases, ::Lnrpc::ListAliasesRequest, ::Lnrpc::ListAliasesResponse
-      rpc :LookupHtlc, ::Lnrpc::LookupHtlcRequest, ::Lnrpc::LookupHtlcResponse
+      #
+      # LookupHtlcResolution retrieves a final htlc resolution from the database.
+      # If the htlc has no final resolution yet, a NotFound grpc status code is
+      # returned.
+      rpc :LookupHtlcResolution, ::Lnrpc::LookupHtlcResolutionRequest, ::Lnrpc::LookupHtlcResolutionResponse
     end
 
     Stub = Service.rpc_stub_class

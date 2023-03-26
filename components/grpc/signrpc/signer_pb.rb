@@ -83,10 +83,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :all_signer_pubkeys, :bytes, 1
       repeated :tweaks, :message, 2, "signrpc.TweakDesc"
       optional :taproot_tweak, :message, 3, "signrpc.TaprootTweakDesc"
+      optional :version, :enum, 4, "signrpc.MuSig2Version"
     end
     add_message "signrpc.MuSig2CombineKeysResponse" do
       optional :combined_key, :bytes, 1
       optional :taproot_internal_key, :bytes, 2
+      optional :version, :enum, 4, "signrpc.MuSig2Version"
     end
     add_message "signrpc.MuSig2SessionRequest" do
       optional :key_loc, :message, 1, "signrpc.KeyLocator"
@@ -94,6 +96,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :other_signer_public_nonces, :bytes, 3
       repeated :tweaks, :message, 4, "signrpc.TweakDesc"
       optional :taproot_tweak, :message, 5, "signrpc.TaprootTweakDesc"
+      optional :version, :enum, 6, "signrpc.MuSig2Version"
     end
     add_message "signrpc.MuSig2SessionResponse" do
       optional :session_id, :bytes, 1
@@ -101,6 +104,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :taproot_internal_key, :bytes, 3
       optional :local_public_nonces, :bytes, 4
       optional :have_all_nonces, :bool, 5
+      optional :version, :enum, 6, "signrpc.MuSig2Version"
     end
     add_message "signrpc.MuSig2RegisterNoncesRequest" do
       optional :session_id, :bytes, 1
@@ -136,6 +140,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SIGN_METHOD_TAPROOT_KEY_SPEND, 2
       value :SIGN_METHOD_TAPROOT_SCRIPT_SPEND, 3
     end
+    add_enum "signrpc.MuSig2Version" do
+      value :MUSIG2_VERSION_UNDEFINED, 0
+      value :MUSIG2_VERSION_V040, 1
+      value :MUSIG2_VERSION_V100RC2, 2
+    end
   end
 end
 
@@ -169,4 +178,5 @@ module Signrpc
   MuSig2CleanupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("signrpc.MuSig2CleanupRequest").msgclass
   MuSig2CleanupResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("signrpc.MuSig2CleanupResponse").msgclass
   SignMethod = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("signrpc.SignMethod").enummodule
+  MuSig2Version = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("signrpc.MuSig2Version").enummodule
 end

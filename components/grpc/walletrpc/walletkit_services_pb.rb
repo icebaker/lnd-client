@@ -65,6 +65,41 @@ module Walletrpc
       # wallet accounts and return the addresses of only those matching.
       rpc :ListAddresses, ::Walletrpc::ListAddressesRequest, ::Walletrpc::ListAddressesResponse
       #
+      # SignMessageWithAddr returns the compact signature (base64 encoded) created
+      # with the private key of the provided address. This requires the address
+      # to be solely based on a public key lock (no scripts). Obviously the internal
+      # lnd wallet has to possess the private key of the address otherwise
+      # an error is returned.
+      #
+      # This method aims to provide full compatibility with the bitcoin-core and
+      # btcd implementation. Bitcoin-core's algorithm is not specified in a
+      # BIP and only applicable for legacy addresses. This method enhances the
+      # signing for additional address types: P2WKH, NP2WKH, P2TR.
+      # For P2TR addresses this represents a special case. ECDSA is used to create
+      # a compact signature which makes the public key of the signature recoverable.
+      rpc :SignMessageWithAddr, ::Walletrpc::SignMessageWithAddrRequest, ::Walletrpc::SignMessageWithAddrResponse
+      #
+      # VerifyMessageWithAddr returns the validity and the recovered public key of
+      # the provided compact signature (base64 encoded). The verification is
+      # twofold. First the validity of the signature itself is checked and then
+      # it is verified that the recovered public key of the signature equals
+      # the public key of the provided address. There is no dependence on the
+      # private key of the address therefore also external addresses are allowed
+      # to verify signatures.
+      # Supported address types are P2PKH, P2WKH, NP2WKH, P2TR.
+      #
+      # This method is the counterpart of the related signing method
+      # (SignMessageWithAddr) and aims to provide full compatibility to
+      # bitcoin-core's implementation. Although bitcoin-core/btcd only provide
+      # this functionality for legacy addresses this function enhances it to
+      # the address types: P2PKH, P2WKH, NP2WKH, P2TR.
+      #
+      # The verification for P2TR addresses is a special case and requires the
+      # ECDSA compact signature to compare the reovered public key to the internal
+      # taproot key. The compact ECDSA signature format was used because there
+      # are still no known compact signature schemes for schnorr signatures.
+      rpc :VerifyMessageWithAddr, ::Walletrpc::VerifyMessageWithAddrRequest, ::Walletrpc::VerifyMessageWithAddrResponse
+      #
       # ImportAccount imports an account backed by an account extended public key.
       # The master key fingerprint denotes the fingerprint of the root key
       # corresponding to the account public key (also known as the key with
