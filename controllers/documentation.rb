@@ -10,6 +10,7 @@ module LNDClientInternal
     PROGRESS = true
     PATH = 'docs/README.md'
     KEY = '<!-- [INJECT:GRP:DOCS] -->'
+    KEY_INDEX = '<!-- [INJECT:GRP:INDEX] -->'
 
     attr_reader :available_methods
 
@@ -35,6 +36,18 @@ module LNDClientInternal
         progressbar = ProgressBar.create(total: total, format: '%a %e |%b>>%i| %P% | %c of %C')
       end
 
+      document = File.read(PATH)
+
+      content = ''
+
+      services.each do |service|
+        content += "- [#{service}](?id=#{service})\n"
+      end
+
+      parts = document.split(KEY_INDEX)
+
+      document = "#{parts[0]}#{KEY_INDEX}\n\n#{content}\n#{KEY_INDEX}#{parts[2]}"
+
       content = ''
 
       services.each do |service|
@@ -44,9 +57,11 @@ module LNDClientInternal
         doc.available_methods.each do |method_name|
           content += "\n### #{method_name}\n"
 
-          url = "https://lightning.engineering/api-docs/api/lnd/#{service}/#{method_name.gsub('_', '-')}/index.html"
+          url = "https://lightning.engineering/api-docs/api/lnd/#{service.to_s.gsub('_',
+                                                                                    '-')}/#{method_name.gsub('_',
+                                                                                                             '-')}/index.html"
 
-          content += "\n[lightning.engineering/#{service}/#{method_name.gsub('_', '-')}](#{url})\n"
+          content += "\n[lightning.engineering/#{service.to_s.gsub('_', '-')}/#{method_name.gsub('_', '-')}](#{url})\n"
 
           description = doc.describe(method_name)
           content += "\n```ruby\n"
@@ -74,11 +89,11 @@ module LNDClientInternal
         end
       end
 
-      document = File.read(PATH)
-
       parts = document.split(KEY)
 
-      File.write(PATH, "#{parts[0]}#{KEY}\n\n#{content}\n#{KEY}#{parts[2]}")
+      document = "#{parts[0]}#{KEY}\n\n#{content}\n#{KEY}#{parts[2]}"
+
+      File.write(PATH, document)
 
       progressbar.finish
 

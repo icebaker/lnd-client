@@ -2,7 +2,7 @@
 # Source: signrpc/signer.proto for package 'signrpc'
 
 require 'grpc'
-require_relative 'signrpc/signer_pb'
+require_relative './signer_pb'
 
 module Signrpc
   module Signer

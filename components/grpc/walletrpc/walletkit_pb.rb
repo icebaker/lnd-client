@@ -3,8 +3,8 @@
 
 require 'google/protobuf'
 
-require_relative 'lightning_pb'
-require_relative 'signrpc/signer_pb'
+require_relative '../lightning_pb'
+require_relative '../signrpc/signer_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("walletrpc/walletkit.proto", :syntax => :proto3) do
@@ -83,6 +83,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "walletrpc.ListAddressesResponse" do
       repeated :account_with_addresses, :message, 1, "walletrpc.AccountWithAddresses"
+    end
+    add_message "walletrpc.SignMessageWithAddrRequest" do
+      optional :msg, :bytes, 1
+      optional :addr, :string, 2
+    end
+    add_message "walletrpc.SignMessageWithAddrResponse" do
+      optional :signature, :string, 1
+    end
+    add_message "walletrpc.VerifyMessageWithAddrRequest" do
+      optional :msg, :bytes, 1
+      optional :signature, :string, 2
+      optional :addr, :string, 3
+    end
+    add_message "walletrpc.VerifyMessageWithAddrResponse" do
+      optional :valid, :bool, 1
+      optional :pubkey, :bytes, 2
     end
     add_message "walletrpc.ImportAccountRequest" do
       optional :name, :string, 1
@@ -198,6 +214,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :account, :string, 5
       optional :min_confs, :int32, 6
       optional :spend_unconfirmed, :bool, 7
+      optional :change_type, :enum, 8, "walletrpc.ChangeAddressType"
       oneof :template do
         optional :psbt, :bytes, 1
         optional :raw, :message, 2, "walletrpc.TxTemplate"
@@ -266,6 +283,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :NESTED_WITNESS_KEY_HASH, 12
       value :COMMITMENT_ANCHOR, 13
     end
+    add_enum "walletrpc.ChangeAddressType" do
+      value :CHANGE_ADDRESS_TYPE_UNSPECIFIED, 0
+      value :CHANGE_ADDRESS_TYPE_P2TR, 1
+    end
   end
 end
 
@@ -288,6 +309,10 @@ module Walletrpc
   RequiredReserveResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.RequiredReserveResponse").msgclass
   ListAddressesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.ListAddressesRequest").msgclass
   ListAddressesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.ListAddressesResponse").msgclass
+  SignMessageWithAddrRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.SignMessageWithAddrRequest").msgclass
+  SignMessageWithAddrResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.SignMessageWithAddrResponse").msgclass
+  VerifyMessageWithAddrRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.VerifyMessageWithAddrRequest").msgclass
+  VerifyMessageWithAddrResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.VerifyMessageWithAddrResponse").msgclass
   ImportAccountRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.ImportAccountRequest").msgclass
   ImportAccountResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.ImportAccountResponse").msgclass
   ImportPublicKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.ImportPublicKeyRequest").msgclass
@@ -325,4 +350,5 @@ module Walletrpc
   ListLeasesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.ListLeasesResponse").msgclass
   AddressType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.AddressType").enummodule
   WitnessType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.WitnessType").enummodule
+  ChangeAddressType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("walletrpc.ChangeAddressType").enummodule
 end

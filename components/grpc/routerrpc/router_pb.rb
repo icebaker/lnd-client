@@ -100,6 +100,26 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :weight, :float, 3
       optional :maximum_payment_results, :uint32, 4
       optional :minimum_failure_relax_interval, :uint64, 5
+      optional :model, :enum, 6, "routerrpc.MissionControlConfig.ProbabilityModel"
+      oneof :EstimatorConfig do
+        optional :apriori, :message, 7, "routerrpc.AprioriParameters"
+        optional :bimodal, :message, 8, "routerrpc.BimodalParameters"
+      end
+    end
+    add_enum "routerrpc.MissionControlConfig.ProbabilityModel" do
+      value :APRIORI, 0
+      value :BIMODAL, 1
+    end
+    add_message "routerrpc.BimodalParameters" do
+      optional :node_weight, :double, 1
+      optional :scale_msat, :uint64, 2
+      optional :decay_time, :uint64, 3
+    end
+    add_message "routerrpc.AprioriParameters" do
+      optional :half_life_seconds, :uint64, 1
+      optional :hop_probability, :double, 2
+      optional :weight, :double, 3
+      optional :capacity_fraction, :double, 4
     end
     add_message "routerrpc.QueryProbabilityRequest" do
       optional :from_node, :bytes, 1
@@ -272,6 +292,9 @@ module Routerrpc
   SetMissionControlConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("routerrpc.SetMissionControlConfigRequest").msgclass
   SetMissionControlConfigResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("routerrpc.SetMissionControlConfigResponse").msgclass
   MissionControlConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("routerrpc.MissionControlConfig").msgclass
+  MissionControlConfig::ProbabilityModel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("routerrpc.MissionControlConfig.ProbabilityModel").enummodule
+  BimodalParameters = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("routerrpc.BimodalParameters").msgclass
+  AprioriParameters = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("routerrpc.AprioriParameters").msgclass
   QueryProbabilityRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("routerrpc.QueryProbabilityRequest").msgclass
   QueryProbabilityResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("routerrpc.QueryProbabilityResponse").msgclass
   BuildRouteRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("routerrpc.BuildRouteRequest").msgclass

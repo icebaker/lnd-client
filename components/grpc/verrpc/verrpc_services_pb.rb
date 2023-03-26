@@ -2,7 +2,7 @@
 # Source: verrpc/verrpc.proto for package 'verrpc'
 
 require 'grpc'
-require_relative 'verrpc/verrpc_pb'
+require_relative './verrpc_pb'
 
 module Verrpc
   module Versioner

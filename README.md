@@ -6,6 +6,7 @@ This is a low-level client library. For a better experience, you may want to che
 
 - [Usage](#usage)
   - [Documentation](https://icebaker.github.io/lnd-client)
+- [Available Supported Services][#available-supported-services]
 - [Development](#development)
   - [Upgrading gRPC Proto Files](#upgrading-grpc-proto-files)
   - [Generating Documentation](#generating-documentation)
@@ -55,6 +56,25 @@ end
 ```
 
 Check the [full documentation](https://icebaker.github.io/lnd-client).
+
+## Available Supported Services
+
+- [autopilot](https://icebaker.github.io/lnd-client/#/README?id=autopilot)
+- [chain_kit](https://icebaker.github.io/lnd-client/#/README?id=chain_kit)
+- [chain_notifier](https://icebaker.github.io/lnd-client/#/README?id=chain_notifier)
+- [dev](https://icebaker.github.io/lnd-client/#/README?id=dev)
+- [invoices](https://icebaker.github.io/lnd-client/#/README?id=invoices)
+- [lightning](https://icebaker.github.io/lnd-client/#/README?id=lightning)
+- [neutrino_kit](https://icebaker.github.io/lnd-client/#/README?id=neutrino_kit)
+- [peers](https://icebaker.github.io/lnd-client/#/README?id=peers)
+- [router](https://icebaker.github.io/lnd-client/#/README?id=router)
+- [signer](https://icebaker.github.io/lnd-client/#/README?id=signer)
+- [state](https://icebaker.github.io/lnd-client/#/README?id=state)
+- [versioner](https://icebaker.github.io/lnd-client/#/README?id=versioner)
+- [wallet_kit](https://icebaker.github.io/lnd-client/#/README?id=wallet_kit)
+- [wallet_unlocker](https://icebaker.github.io/lnd-client/#/README?id=wallet_unlocker)
+- [watchtower](https://icebaker.github.io/lnd-client/#/README?id=watchtower)
+- [watchtower_client](https://icebaker.github.io/lnd-client/#/README?id=watchtower_client)
 
 ## Development
 

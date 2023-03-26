@@ -292,8 +292,280 @@ gem push lnd-client-0.0.8.gem
 
 # Services
 
+## All Services
+
+<!-- [INJECT:GRP:INDEX] -->
+
+- [autopilot](?id=autopilot)
+- [chain_kit](?id=chain_kit)
+- [chain_notifier](?id=chain_notifier)
+- [dev](?id=dev)
+- [invoices](?id=invoices)
+- [lightning](?id=lightning)
+- [neutrino_kit](?id=neutrino_kit)
+- [peers](?id=peers)
+- [router](?id=router)
+- [signer](?id=signer)
+- [state](?id=state)
+- [versioner](?id=versioner)
+- [wallet_kit](?id=wallet_kit)
+- [wallet_unlocker](?id=wallet_unlocker)
+- [watchtower](?id=watchtower)
+- [watchtower_client](?id=watchtower_client)
+
+<!-- [INJECT:GRP:INDEX] -->
+
 <!-- [INJECT:GRP:DOCS] -->
 
+## autopilot
+
+### modify_status
+
+[lightning.engineering/autopilot/modify-status](https://lightning.engineering/api-docs/api/lnd/autopilot/modify-status/index.html)
+
+```ruby
+client.autopilot.modify_status(
+  { enable: false }
+)
+```
+
+### query_scores
+
+[lightning.engineering/autopilot/query-scores](https://lightning.engineering/api-docs/api/lnd/autopilot/query-scores/index.html)
+
+```ruby
+client.autopilot.query_scores(
+  { pubkeys: [],
+    ignore_local_state: false }
+)
+```
+
+Output:
+```ruby
+{ results: [] }
+```
+
+### set_scores
+
+[lightning.engineering/autopilot/set-scores](https://lightning.engineering/api-docs/api/lnd/autopilot/set-scores/index.html)
+
+```ruby
+client.autopilot.set_scores(
+  { heuristic: '',
+    scores: {} }
+)
+```
+
+### status
+
+[lightning.engineering/autopilot/status](https://lightning.engineering/api-docs/api/lnd/autopilot/status/index.html)
+
+```ruby
+client.autopilot.status
+```
+
+Output:
+```ruby
+{ active: false }
+```
+## chain_kit
+
+### get_best_block
+
+[lightning.engineering/chain-kit/get-best-block](https://lightning.engineering/api-docs/api/lnd/chain-kit/get-best-block/index.html)
+
+```ruby
+client.chain_kit.get_best_block
+```
+
+Output:
+```ruby
+{ block_hash: '',
+  block_height: 0 }
+```
+
+### get_block
+
+[lightning.engineering/chain-kit/get-block](https://lightning.engineering/api-docs/api/lnd/chain-kit/get-block/index.html)
+
+```ruby
+client.chain_kit.get_block(
+  { block_hash: '' }
+)
+```
+
+Output:
+```ruby
+{ raw_block: '' }
+```
+
+### get_block_hash
+
+[lightning.engineering/chain-kit/get-block-hash](https://lightning.engineering/api-docs/api/lnd/chain-kit/get-block-hash/index.html)
+
+```ruby
+client.chain_kit.get_block_hash(
+  { block_height: 0 }
+)
+```
+
+Output:
+```ruby
+{ block_hash: '' }
+```
+## chain_notifier
+
+### register_block_epoch_ntfn
+
+[lightning.engineering/chain-notifier/register-block-epoch-ntfn](https://lightning.engineering/api-docs/api/lnd/chain-notifier/register-block-epoch-ntfn/index.html)
+
+```ruby
+client.chain_notifier.register_block_epoch_ntfn(
+  { hash: '',
+    height: 0 }
+)
+```
+
+### register_confirmations_ntfn
+
+[lightning.engineering/chain-notifier/register-confirmations-ntfn](https://lightning.engineering/api-docs/api/lnd/chain-notifier/register-confirmations-ntfn/index.html)
+
+```ruby
+client.chain_notifier.register_confirmations_ntfn(
+  { txid: '',
+    script: '',
+    num_confs: 0,
+    height_hint: 0,
+    include_block: false }
+)
+```
+
+### register_spend_ntfn
+
+[lightning.engineering/chain-notifier/register-spend-ntfn](https://lightning.engineering/api-docs/api/lnd/chain-notifier/register-spend-ntfn/index.html)
+
+```ruby
+client.chain_notifier.register_spend_ntfn(
+  { outpoint: nil,
+    script: '',
+    height_hint: 0 }
+)
+```
+## dev
+
+### import_graph
+
+[lightning.engineering/dev/import-graph](https://lightning.engineering/api-docs/api/lnd/dev/import-graph/index.html)
+
+```ruby
+client.dev.import_graph(
+  { nodes: [],
+    edges: [] }
+)
+```
+## invoices
+
+### add_hold_invoice
+
+[lightning.engineering/invoices/add-hold-invoice](https://lightning.engineering/api-docs/api/lnd/invoices/add-hold-invoice/index.html)
+
+```ruby
+client.invoices.add_hold_invoice(
+  { memo: '',
+    hash: '',
+    value: 0,
+    value_msat: 0,
+    description_hash: '',
+    expiry: 0,
+    fallback_addr: '',
+    cltv_expiry: 0,
+    route_hints: [],
+    private: false }
+)
+```
+
+Output:
+```ruby
+{ payment_request: '',
+  add_index: 0,
+  payment_addr: '' }
+```
+
+### cancel_invoice
+
+[lightning.engineering/invoices/cancel-invoice](https://lightning.engineering/api-docs/api/lnd/invoices/cancel-invoice/index.html)
+
+```ruby
+client.invoices.cancel_invoice(
+  { payment_hash: '' }
+)
+```
+
+### lookup_invoice_v2
+
+[lightning.engineering/invoices/lookup-invoice-v2](https://lightning.engineering/api-docs/api/lnd/invoices/lookup-invoice-v2/index.html)
+
+```ruby
+client.invoices.lookup_invoice_v2(
+  { lookup_modifier: :DEFAULT,
+    payment_hash: '',
+    payment_addr: '',
+    set_id: '' }
+)
+```
+
+Output:
+```ruby
+{ memo: '',
+  r_preimage: '',
+  r_hash: '',
+  value: 0,
+  value_msat: 0,
+  settled: false,
+  creation_date: 0,
+  settle_date: 0,
+  payment_request: '',
+  description_hash: '',
+  expiry: 0,
+  fallback_addr: '',
+  cltv_expiry: 0,
+  route_hints: [],
+  private: false,
+  add_index: 0,
+  settle_index: 0,
+  amt_paid: 0,
+  amt_paid_sat: 0,
+  amt_paid_msat: 0,
+  state: :OPEN,
+  htlcs: [],
+  features: {},
+  is_keysend: false,
+  payment_addr: '',
+  is_amp: false,
+  amp_invoice_state: {} }
+```
+
+### settle_invoice
+
+[lightning.engineering/invoices/settle-invoice](https://lightning.engineering/api-docs/api/lnd/invoices/settle-invoice/index.html)
+
+```ruby
+client.invoices.settle_invoice(
+  { preimage: '' }
+)
+```
+
+### subscribe_single_invoice
+
+[lightning.engineering/invoices/subscribe-single-invoice](https://lightning.engineering/api-docs/api/lnd/invoices/subscribe-single-invoice/index.html)
+
+```ruby
+client.invoices.subscribe_single_invoice(
+  { r_hash: '' }
+) do |data|
+  puts data.inspect # => { ... }
+end
+```
 ## lightning
 
 ### abandon_channel
@@ -738,7 +1010,8 @@ Output:
   chains: [],
   uris: [],
   features: {},
-  require_htlc_interceptor: false }
+  require_htlc_interceptor: false,
+  store_final_htlc_resolutions: false }
 ```
 
 ### get_network_info
@@ -853,7 +1126,8 @@ client.lightning.list_channels(
     inactive_only: false,
     public_only: false,
     private_only: false,
-    peer: '' }
+    peer: '',
+    peer_alias_lookup: false }
 )
 ```
 
@@ -966,12 +1240,12 @@ Output:
 { utxos: [] }
 ```
 
-### lookup_htlc
+### lookup_htlc_resolution
 
-[lightning.engineering/lightning/lookup-htlc](https://lightning.engineering/api-docs/api/lnd/lightning/lookup-htlc/index.html)
+[lightning.engineering/lightning/lookup-htlc-resolution](https://lightning.engineering/api-docs/api/lnd/lightning/lookup-htlc-resolution/index.html)
 
 ```ruby
-client.lightning.lookup_htlc(
+client.lightning.lookup_htlc_resolution(
   { chan_id: 0,
     htlc_index: 0 }
 )
@@ -1478,6 +1752,167 @@ Output:
   reserved_balance_anchor_chan: 0,
   account_balance: {} }
 ```
+## neutrino_kit
+
+### add_peer
+
+[lightning.engineering/neutrino-kit/add-peer](https://lightning.engineering/api-docs/api/lnd/neutrino-kit/add-peer/index.html)
+
+```ruby
+client.neutrino_kit.add_peer(
+  { peer_addrs: '' }
+)
+```
+
+### disconnect_peer
+
+[lightning.engineering/neutrino-kit/disconnect-peer](https://lightning.engineering/api-docs/api/lnd/neutrino-kit/disconnect-peer/index.html)
+
+```ruby
+client.neutrino_kit.disconnect_peer(
+  { peer_addrs: '' }
+)
+```
+
+### get_block
+
+[lightning.engineering/neutrino-kit/get-block](https://lightning.engineering/api-docs/api/lnd/neutrino-kit/get-block/index.html)
+
+```ruby
+client.neutrino_kit.get_block(
+  { hash: '' }
+)
+```
+
+Output:
+```ruby
+{ hash: '',
+  confirmations: 0,
+  stripped_size: 0,
+  size: 0,
+  weight: 0,
+  height: 0,
+  version: 0,
+  version_hex: '',
+  merkleroot: '',
+  tx: [],
+  time: 0,
+  nonce: 0,
+  bits: '',
+  ntx: 0,
+  previous_block_hash: '',
+  raw_hex: '' }
+```
+
+### get_block_hash
+
+[lightning.engineering/neutrino-kit/get-block-hash](https://lightning.engineering/api-docs/api/lnd/neutrino-kit/get-block-hash/index.html)
+
+```ruby
+client.neutrino_kit.get_block_hash(
+  { height: 0 }
+)
+```
+
+Output:
+```ruby
+{ hash: '' }
+```
+
+### get_block_header
+
+[lightning.engineering/neutrino-kit/get-block-header](https://lightning.engineering/api-docs/api/lnd/neutrino-kit/get-block-header/index.html)
+
+```ruby
+client.neutrino_kit.get_block_header(
+  { hash: '' }
+)
+```
+
+Output:
+```ruby
+{ hash: '',
+  confirmations: 0,
+  stripped_size: 0,
+  size: 0,
+  weight: 0,
+  height: 0,
+  version: 0,
+  version_hex: '',
+  merkleroot: '',
+  time: 0,
+  nonce: 0,
+  bits: '',
+  ntx: 0,
+  previous_block_hash: '',
+  raw_hex: '' }
+```
+
+### get_c_filter
+
+[lightning.engineering/neutrino-kit/get-c-filter](https://lightning.engineering/api-docs/api/lnd/neutrino-kit/get-c-filter/index.html)
+
+```ruby
+client.neutrino_kit.get_c_filter(
+  { hash: '' }
+)
+```
+
+Output:
+```ruby
+{ filter: '' }
+```
+
+### is_banned
+
+[lightning.engineering/neutrino-kit/is-banned](https://lightning.engineering/api-docs/api/lnd/neutrino-kit/is-banned/index.html)
+
+```ruby
+client.neutrino_kit.is_banned(
+  { peer_addrs: '' }
+)
+```
+
+Output:
+```ruby
+{ banned: false }
+```
+
+### status
+
+[lightning.engineering/neutrino-kit/status](https://lightning.engineering/api-docs/api/lnd/neutrino-kit/status/index.html)
+
+```ruby
+client.neutrino_kit.status
+```
+
+Output:
+```ruby
+{ active: false,
+  synced: false,
+  block_height: 0,
+  block_hash: '',
+  peers: [] }
+```
+## peers
+
+### update_node_announcement
+
+[lightning.engineering/peers/update-node-announcement](https://lightning.engineering/api-docs/api/lnd/peers/update-node-announcement/index.html)
+
+```ruby
+client.peers.update_node_announcement(
+  { feature_updates: [],
+    color: '',
+    alias: '',
+    address_updates: [] }
+)
+```
+
+Output:
+```ruby
+{ ops: [] }
+```
 ## router
 
 ### build_route
@@ -1753,6 +2188,833 @@ client.router.x_import_mission_control(
   { pairs: [],
     force: false }
 )
+```
+## signer
+
+### compute_input_script
+
+[lightning.engineering/signer/compute-input-script](https://lightning.engineering/api-docs/api/lnd/signer/compute-input-script/index.html)
+
+```ruby
+client.signer.compute_input_script(
+  { raw_tx_bytes: '',
+    sign_descs: [],
+    prev_outputs: [] }
+)
+```
+
+Output:
+```ruby
+{ input_scripts: [] }
+```
+
+### derive_shared_key
+
+[lightning.engineering/signer/derive-shared-key](https://lightning.engineering/api-docs/api/lnd/signer/derive-shared-key/index.html)
+
+```ruby
+client.signer.derive_shared_key(
+  { ephemeral_pubkey: '',
+    key_loc: nil,
+    key_desc: nil }
+)
+```
+
+Output:
+```ruby
+{ shared_key: '' }
+```
+
+### mu_sig2_cleanup
+
+[lightning.engineering/signer/mu-sig2-cleanup](https://lightning.engineering/api-docs/api/lnd/signer/mu-sig2-cleanup/index.html)
+
+```ruby
+client.signer.mu_sig2_cleanup(
+  { session_id: '' }
+)
+```
+
+### mu_sig2_combine_keys
+
+[lightning.engineering/signer/mu-sig2-combine-keys](https://lightning.engineering/api-docs/api/lnd/signer/mu-sig2-combine-keys/index.html)
+
+```ruby
+client.signer.mu_sig2_combine_keys(
+  { all_signer_pubkeys: [],
+    tweaks: [],
+    taproot_tweak: nil,
+    version: :MUSIG2_VERSION_UNDEFINED }
+)
+```
+
+Output:
+```ruby
+{ combined_key: '',
+  taproot_internal_key: '',
+  version: :MUSIG2_VERSION_UNDEFINED }
+```
+
+### mu_sig2_combine_sig
+
+[lightning.engineering/signer/mu-sig2-combine-sig](https://lightning.engineering/api-docs/api/lnd/signer/mu-sig2-combine-sig/index.html)
+
+```ruby
+client.signer.mu_sig2_combine_sig(
+  { session_id: '',
+    other_partial_signatures: [] }
+)
+```
+
+Output:
+```ruby
+{ have_all_signatures: false,
+  final_signature: '' }
+```
+
+### mu_sig2_create_session
+
+[lightning.engineering/signer/mu-sig2-create-session](https://lightning.engineering/api-docs/api/lnd/signer/mu-sig2-create-session/index.html)
+
+```ruby
+client.signer.mu_sig2_create_session(
+  { key_loc: nil,
+    all_signer_pubkeys: [],
+    other_signer_public_nonces: [],
+    tweaks: [],
+    taproot_tweak: nil,
+    version: :MUSIG2_VERSION_UNDEFINED }
+)
+```
+
+Output:
+```ruby
+{ session_id: '',
+  combined_key: '',
+  taproot_internal_key: '',
+  local_public_nonces: '',
+  have_all_nonces: false,
+  version: :MUSIG2_VERSION_UNDEFINED }
+```
+
+### mu_sig2_register_nonces
+
+[lightning.engineering/signer/mu-sig2-register-nonces](https://lightning.engineering/api-docs/api/lnd/signer/mu-sig2-register-nonces/index.html)
+
+```ruby
+client.signer.mu_sig2_register_nonces(
+  { session_id: '',
+    other_signer_public_nonces: [] }
+)
+```
+
+Output:
+```ruby
+{ have_all_nonces: false }
+```
+
+### mu_sig2_sign
+
+[lightning.engineering/signer/mu-sig2-sign](https://lightning.engineering/api-docs/api/lnd/signer/mu-sig2-sign/index.html)
+
+```ruby
+client.signer.mu_sig2_sign(
+  { session_id: '',
+    message_digest: '',
+    cleanup: false }
+)
+```
+
+Output:
+```ruby
+{ local_partial_signature: '' }
+```
+
+### sign_message
+
+[lightning.engineering/signer/sign-message](https://lightning.engineering/api-docs/api/lnd/signer/sign-message/index.html)
+
+```ruby
+client.signer.sign_message(
+  { msg: '',
+    key_loc: nil,
+    double_hash: false,
+    compact_sig: false,
+    schnorr_sig: false,
+    schnorr_sig_tap_tweak: '' }
+)
+```
+
+Output:
+```ruby
+{ signature: '' }
+```
+
+### sign_output_raw
+
+[lightning.engineering/signer/sign-output-raw](https://lightning.engineering/api-docs/api/lnd/signer/sign-output-raw/index.html)
+
+```ruby
+client.signer.sign_output_raw(
+  { raw_tx_bytes: '',
+    sign_descs: [],
+    prev_outputs: [] }
+)
+```
+
+Output:
+```ruby
+{ raw_sigs: [] }
+```
+
+### verify_message
+
+[lightning.engineering/signer/verify-message](https://lightning.engineering/api-docs/api/lnd/signer/verify-message/index.html)
+
+```ruby
+client.signer.verify_message(
+  { msg: '',
+    signature: '',
+    pubkey: '',
+    is_schnorr_sig: false }
+)
+```
+
+Output:
+```ruby
+{ valid: false }
+```
+## state
+
+### get_state
+
+[lightning.engineering/state/get-state](https://lightning.engineering/api-docs/api/lnd/state/get-state/index.html)
+
+```ruby
+client.state.get_state
+```
+
+Output:
+```ruby
+{ state: :NON_EXISTING }
+```
+
+### subscribe_state
+
+[lightning.engineering/state/subscribe-state](https://lightning.engineering/api-docs/api/lnd/state/subscribe-state/index.html)
+
+```ruby
+client.state.subscribe_state do |data|
+  puts data.inspect # => { ... }
+end
+```
+## versioner
+
+### get_version
+
+[lightning.engineering/versioner/get-version](https://lightning.engineering/api-docs/api/lnd/versioner/get-version/index.html)
+
+```ruby
+client.versioner.get_version
+```
+
+Output:
+```ruby
+{ commit: '',
+  commit_hash: '',
+  version: '',
+  app_major: 0,
+  app_minor: 0,
+  app_patch: 0,
+  app_pre_release: '',
+  build_tags: [],
+  go_version: '' }
+```
+## wallet_kit
+
+### bump_fee
+
+[lightning.engineering/wallet-kit/bump-fee](https://lightning.engineering/api-docs/api/lnd/wallet-kit/bump-fee/index.html)
+
+```ruby
+client.wallet_kit.bump_fee(
+  { outpoint: nil,
+    target_conf: 0,
+    sat_per_byte: 0,
+    force: false,
+    sat_per_vbyte: 0 }
+)
+```
+
+### derive_key
+
+[lightning.engineering/wallet-kit/derive-key](https://lightning.engineering/api-docs/api/lnd/wallet-kit/derive-key/index.html)
+
+```ruby
+client.wallet_kit.derive_key(
+  { key_family: 0,
+    key_index: 0 }
+)
+```
+
+Output:
+```ruby
+{ raw_key_bytes: '',
+  key_loc: nil }
+```
+
+### derive_next_key
+
+[lightning.engineering/wallet-kit/derive-next-key](https://lightning.engineering/api-docs/api/lnd/wallet-kit/derive-next-key/index.html)
+
+```ruby
+client.wallet_kit.derive_next_key(
+  { key_finger_print: 0,
+    key_family: 0 }
+)
+```
+
+Output:
+```ruby
+{ raw_key_bytes: '',
+  key_loc: nil }
+```
+
+### estimate_fee
+
+[lightning.engineering/wallet-kit/estimate-fee](https://lightning.engineering/api-docs/api/lnd/wallet-kit/estimate-fee/index.html)
+
+```ruby
+client.wallet_kit.estimate_fee(
+  { conf_target: 0 }
+)
+```
+
+Output:
+```ruby
+{ sat_per_kw: 0 }
+```
+
+### finalize_psbt
+
+[lightning.engineering/wallet-kit/finalize-psbt](https://lightning.engineering/api-docs/api/lnd/wallet-kit/finalize-psbt/index.html)
+
+```ruby
+client.wallet_kit.finalize_psbt(
+  { funded_psbt: '',
+    account: '' }
+)
+```
+
+Output:
+```ruby
+{ signed_psbt: '',
+  raw_final_tx: '' }
+```
+
+### fund_psbt
+
+[lightning.engineering/wallet-kit/fund-psbt](https://lightning.engineering/api-docs/api/lnd/wallet-kit/fund-psbt/index.html)
+
+```ruby
+client.wallet_kit.fund_psbt(
+  { account: '',
+    min_confs: 0,
+    spend_unconfirmed: false,
+    change_type: :CHANGE_ADDRESS_TYPE_UNSPECIFIED,
+    psbt: '',
+    raw: nil,
+    target_conf: 0,
+    sat_per_vbyte: 0 }
+)
+```
+
+Output:
+```ruby
+{ funded_psbt: '',
+  change_output_index: 0,
+  locked_utxos: [] }
+```
+
+### import_account
+
+[lightning.engineering/wallet-kit/import-account](https://lightning.engineering/api-docs/api/lnd/wallet-kit/import-account/index.html)
+
+```ruby
+client.wallet_kit.import_account(
+  { name: '',
+    extended_public_key: '',
+    master_key_fingerprint: '',
+    address_type: :UNKNOWN,
+    dry_run: false }
+)
+```
+
+Output:
+```ruby
+{ account: nil,
+  dry_run_external_addrs: [],
+  dry_run_internal_addrs: [] }
+```
+
+### import_public_key
+
+[lightning.engineering/wallet-kit/import-public-key](https://lightning.engineering/api-docs/api/lnd/wallet-kit/import-public-key/index.html)
+
+```ruby
+client.wallet_kit.import_public_key(
+  { public_key: '',
+    address_type: :UNKNOWN }
+)
+```
+
+### import_tapscript
+
+[lightning.engineering/wallet-kit/import-tapscript](https://lightning.engineering/api-docs/api/lnd/wallet-kit/import-tapscript/index.html)
+
+```ruby
+client.wallet_kit.import_tapscript(
+  { internal_public_key: '',
+    full_tree: nil,
+    partial_reveal: nil,
+    root_hash_only: '',
+    full_key_only: false }
+)
+```
+
+Output:
+```ruby
+{ p2tr_address: '' }
+```
+
+### label_transaction
+
+[lightning.engineering/wallet-kit/label-transaction](https://lightning.engineering/api-docs/api/lnd/wallet-kit/label-transaction/index.html)
+
+```ruby
+client.wallet_kit.label_transaction(
+  { txid: '',
+    label: '',
+    overwrite: false }
+)
+```
+
+### lease_output
+
+[lightning.engineering/wallet-kit/lease-output](https://lightning.engineering/api-docs/api/lnd/wallet-kit/lease-output/index.html)
+
+```ruby
+client.wallet_kit.lease_output(
+  { id: '',
+    outpoint: nil,
+    expiration_seconds: 0 }
+)
+```
+
+Output:
+```ruby
+{ expiration: 0 }
+```
+
+### list_accounts
+
+[lightning.engineering/wallet-kit/list-accounts](https://lightning.engineering/api-docs/api/lnd/wallet-kit/list-accounts/index.html)
+
+```ruby
+client.wallet_kit.list_accounts(
+  { name: '',
+    address_type: :UNKNOWN }
+)
+```
+
+Output:
+```ruby
+{ accounts: [] }
+```
+
+### list_addresses
+
+[lightning.engineering/wallet-kit/list-addresses](https://lightning.engineering/api-docs/api/lnd/wallet-kit/list-addresses/index.html)
+
+```ruby
+client.wallet_kit.list_addresses(
+  { account_name: '',
+    show_custom_accounts: false }
+)
+```
+
+Output:
+```ruby
+{ account_with_addresses: [] }
+```
+
+### list_leases
+
+[lightning.engineering/wallet-kit/list-leases](https://lightning.engineering/api-docs/api/lnd/wallet-kit/list-leases/index.html)
+
+```ruby
+client.wallet_kit.list_leases
+```
+
+Output:
+```ruby
+{ locked_utxos: [] }
+```
+
+### list_sweeps
+
+[lightning.engineering/wallet-kit/list-sweeps](https://lightning.engineering/api-docs/api/lnd/wallet-kit/list-sweeps/index.html)
+
+```ruby
+client.wallet_kit.list_sweeps(
+  { verbose: false }
+)
+```
+
+Output:
+```ruby
+{ transaction_details: nil,
+  transaction_ids: nil }
+```
+
+### list_unspent
+
+[lightning.engineering/wallet-kit/list-unspent](https://lightning.engineering/api-docs/api/lnd/wallet-kit/list-unspent/index.html)
+
+```ruby
+client.wallet_kit.list_unspent(
+  { min_confs: 0,
+    max_confs: 0,
+    account: '',
+    unconfirmed_only: false }
+)
+```
+
+Output:
+```ruby
+{ utxos: [] }
+```
+
+### next_addr
+
+[lightning.engineering/wallet-kit/next-addr](https://lightning.engineering/api-docs/api/lnd/wallet-kit/next-addr/index.html)
+
+```ruby
+client.wallet_kit.next_addr(
+  { account: '',
+    type: :UNKNOWN,
+    change: false }
+)
+```
+
+Output:
+```ruby
+{ addr: '' }
+```
+
+### pending_sweeps
+
+[lightning.engineering/wallet-kit/pending-sweeps](https://lightning.engineering/api-docs/api/lnd/wallet-kit/pending-sweeps/index.html)
+
+```ruby
+client.wallet_kit.pending_sweeps
+```
+
+Output:
+```ruby
+{ pending_sweeps: [] }
+```
+
+### publish_transaction
+
+[lightning.engineering/wallet-kit/publish-transaction](https://lightning.engineering/api-docs/api/lnd/wallet-kit/publish-transaction/index.html)
+
+```ruby
+client.wallet_kit.publish_transaction(
+  { tx_hex: '',
+    label: '' }
+)
+```
+
+Output:
+```ruby
+{ publish_error: '' }
+```
+
+### release_output
+
+[lightning.engineering/wallet-kit/release-output](https://lightning.engineering/api-docs/api/lnd/wallet-kit/release-output/index.html)
+
+```ruby
+client.wallet_kit.release_output(
+  { id: '',
+    outpoint: nil }
+)
+```
+
+### required_reserve
+
+[lightning.engineering/wallet-kit/required-reserve](https://lightning.engineering/api-docs/api/lnd/wallet-kit/required-reserve/index.html)
+
+```ruby
+client.wallet_kit.required_reserve(
+  { additional_public_channels: 0 }
+)
+```
+
+Output:
+```ruby
+{ required_reserve: 0 }
+```
+
+### send_outputs
+
+[lightning.engineering/wallet-kit/send-outputs](https://lightning.engineering/api-docs/api/lnd/wallet-kit/send-outputs/index.html)
+
+```ruby
+client.wallet_kit.send_outputs(
+  { sat_per_kw: 0,
+    outputs: [],
+    label: '',
+    min_confs: 0,
+    spend_unconfirmed: false }
+)
+```
+
+Output:
+```ruby
+{ raw_tx: '' }
+```
+
+### sign_message_with_addr
+
+[lightning.engineering/wallet-kit/sign-message-with-addr](https://lightning.engineering/api-docs/api/lnd/wallet-kit/sign-message-with-addr/index.html)
+
+```ruby
+client.wallet_kit.sign_message_with_addr(
+  { msg: '',
+    addr: '' }
+)
+```
+
+Output:
+```ruby
+{ signature: '' }
+```
+
+### sign_psbt
+
+[lightning.engineering/wallet-kit/sign-psbt](https://lightning.engineering/api-docs/api/lnd/wallet-kit/sign-psbt/index.html)
+
+```ruby
+client.wallet_kit.sign_psbt(
+  { funded_psbt: '' }
+)
+```
+
+Output:
+```ruby
+{ signed_psbt: '',
+  signed_inputs: [] }
+```
+
+### verify_message_with_addr
+
+[lightning.engineering/wallet-kit/verify-message-with-addr](https://lightning.engineering/api-docs/api/lnd/wallet-kit/verify-message-with-addr/index.html)
+
+```ruby
+client.wallet_kit.verify_message_with_addr(
+  { msg: '',
+    signature: '',
+    addr: '' }
+)
+```
+
+Output:
+```ruby
+{ valid: false,
+  pubkey: '' }
+```
+## wallet_unlocker
+
+### change_password
+
+[lightning.engineering/wallet-unlocker/change-password](https://lightning.engineering/api-docs/api/lnd/wallet-unlocker/change-password/index.html)
+
+```ruby
+client.wallet_unlocker.change_password(
+  { current_password: '',
+    new_password: '',
+    stateless_init: false,
+    new_macaroon_root_key: false }
+)
+```
+
+Output:
+```ruby
+{ admin_macaroon: '' }
+```
+
+### gen_seed
+
+[lightning.engineering/wallet-unlocker/gen-seed](https://lightning.engineering/api-docs/api/lnd/wallet-unlocker/gen-seed/index.html)
+
+```ruby
+client.wallet_unlocker.gen_seed(
+  { aezeed_passphrase: '',
+    seed_entropy: '' }
+)
+```
+
+Output:
+```ruby
+{ cipher_seed_mnemonic: [],
+  enciphered_seed: '' }
+```
+
+### init_wallet
+
+[lightning.engineering/wallet-unlocker/init-wallet](https://lightning.engineering/api-docs/api/lnd/wallet-unlocker/init-wallet/index.html)
+
+```ruby
+client.wallet_unlocker.init_wallet(
+  { wallet_password: '',
+    cipher_seed_mnemonic: [],
+    aezeed_passphrase: '',
+    recovery_window: 0,
+    channel_backups: nil,
+    stateless_init: false,
+    extended_master_key: '',
+    extended_master_key_birthday_timestamp: 0,
+    watch_only: nil,
+    macaroon_root_key: '' }
+)
+```
+
+Output:
+```ruby
+{ admin_macaroon: '' }
+```
+
+### unlock_wallet
+
+[lightning.engineering/wallet-unlocker/unlock-wallet](https://lightning.engineering/api-docs/api/lnd/wallet-unlocker/unlock-wallet/index.html)
+
+```ruby
+client.wallet_unlocker.unlock_wallet(
+  { wallet_password: '',
+    recovery_window: 0,
+    channel_backups: nil,
+    stateless_init: false }
+)
+```
+## watchtower
+
+### get_info
+
+[lightning.engineering/watchtower/get-info](https://lightning.engineering/api-docs/api/lnd/watchtower/get-info/index.html)
+
+```ruby
+client.watchtower.get_info
+```
+
+Output:
+```ruby
+{ pubkey: '',
+  listeners: [],
+  uris: [] }
+```
+## watchtower_client
+
+### add_tower
+
+[lightning.engineering/watchtower-client/add-tower](https://lightning.engineering/api-docs/api/lnd/watchtower-client/add-tower/index.html)
+
+```ruby
+client.watchtower_client.add_tower(
+  { pubkey: '',
+    address: '' }
+)
+```
+
+### get_tower_info
+
+[lightning.engineering/watchtower-client/get-tower-info](https://lightning.engineering/api-docs/api/lnd/watchtower-client/get-tower-info/index.html)
+
+```ruby
+client.watchtower_client.get_tower_info(
+  { pubkey: '',
+    include_sessions: false }
+)
+```
+
+Output:
+```ruby
+{ pubkey: '',
+  addresses: [],
+  active_session_candidate: false,
+  num_sessions: 0,
+  sessions: [] }
+```
+
+### list_towers
+
+[lightning.engineering/watchtower-client/list-towers](https://lightning.engineering/api-docs/api/lnd/watchtower-client/list-towers/index.html)
+
+```ruby
+client.watchtower_client.list_towers(
+  { include_sessions: false }
+)
+```
+
+Output:
+```ruby
+{ towers: [] }
+```
+
+### policy
+
+[lightning.engineering/watchtower-client/policy](https://lightning.engineering/api-docs/api/lnd/watchtower-client/policy/index.html)
+
+```ruby
+client.watchtower_client.policy(
+  { policy_type: :LEGACY }
+)
+```
+
+Output:
+```ruby
+{ max_updates: 0,
+  sweep_sat_per_byte: 0,
+  sweep_sat_per_vbyte: 0 }
+```
+
+### remove_tower
+
+[lightning.engineering/watchtower-client/remove-tower](https://lightning.engineering/api-docs/api/lnd/watchtower-client/remove-tower/index.html)
+
+```ruby
+client.watchtower_client.remove_tower(
+  { pubkey: '',
+    address: '' }
+)
+```
+
+### stats
+
+[lightning.engineering/watchtower-client/stats](https://lightning.engineering/api-docs/api/lnd/watchtower-client/stats/index.html)
+
+```ruby
+client.watchtower_client.stats
+```
+
+Output:
+```ruby
+{ num_backups: 0,
+  num_pending_backups: 0,
+  num_failed_backups: 0,
+  num_sessions_acquired: 0,
+  num_sessions_exhausted: 0 }
 ```
 
 <!-- [INJECT:GRP:DOCS] -->

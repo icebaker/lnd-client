@@ -5,11 +5,11 @@ require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("lightning.proto", :syntax => :proto3) do
-    add_message "lnrpc.LookupHtlcRequest" do
+    add_message "lnrpc.LookupHtlcResolutionRequest" do
       optional :chan_id, :uint64, 1
       optional :htlc_index, :uint64, 2
     end
-    add_message "lnrpc.LookupHtlcResponse" do
+    add_message "lnrpc.LookupHtlcResolutionResponse" do
       optional :settled, :bool, 1
       optional :offchain, :bool, 2
     end
@@ -282,6 +282,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :alias_scids, :uint64, 31
       optional :zero_conf, :bool, 32
       optional :zero_conf_confirmed_scid, :uint64, 33
+      optional :peer_alias, :string, 34
     end
     add_message "lnrpc.ListChannelsRequest" do
       optional :active_only, :bool, 1
@@ -289,6 +290,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :public_only, :bool, 3
       optional :private_only, :bool, 4
       optional :peer, :bytes, 5
+      optional :peer_alias_lookup, :bool, 6
     end
     add_message "lnrpc.ListChannelsResponse" do
       repeated :channels, :message, 11, "lnrpc.Channel"
@@ -409,6 +411,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :uris, :string, 12
       map :features, :uint32, :message, 19, "lnrpc.Feature"
       optional :require_htlc_interceptor, :bool, 21
+      optional :store_final_htlc_resolutions, :bool, 22
     end
     add_message "lnrpc.GetRecoveryInfoRequest" do
     end
@@ -1400,8 +1403,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
 end
 
 module Lnrpc
-  LookupHtlcRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("lnrpc.LookupHtlcRequest").msgclass
-  LookupHtlcResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("lnrpc.LookupHtlcResponse").msgclass
+  LookupHtlcResolutionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("lnrpc.LookupHtlcResolutionRequest").msgclass
+  LookupHtlcResolutionResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("lnrpc.LookupHtlcResolutionResponse").msgclass
   SubscribeCustomMessagesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("lnrpc.SubscribeCustomMessagesRequest").msgclass
   CustomMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("lnrpc.CustomMessage").msgclass
   SendCustomMessageRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("lnrpc.SendCustomMessageRequest").msgclass
