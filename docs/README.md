@@ -413,6 +413,21 @@ Output:
 ```ruby
 { block_hash: '' }
 ```
+
+### get_block_header
+
+[lightning.engineering/chain-kit/get-block-header](https://lightning.engineering/api-docs/api/lnd/chain-kit/get-block-header/index.html)
+
+```ruby
+client.chain_kit.get_block_header(
+  { block_hash: '' }
+)
+```
+
+Output:
+```ruby
+{ raw_block_header: '' }
+```
 ## chain_notifier
 
 ### register_block_epoch_ntfn
@@ -1345,7 +1360,10 @@ client.lightning.open_channel(
     fee_rate: 0,
     use_base_fee: false,
     use_fee_rate: false,
-    remote_chan_reserve_sat: 0 }
+    remote_chan_reserve_sat: 0,
+    fund_max: false,
+    memo: '',
+    outpoints: [] }
 )
 ```
 
@@ -1379,7 +1397,10 @@ client.lightning.open_channel_sync(
     fee_rate: 0,
     use_base_fee: false,
     use_fee_rate: false,
-    remote_chan_reserve_sat: 0 }
+    remote_chan_reserve_sat: 0,
+    fund_max: false,
+    memo: '',
+    outpoints: [] }
 )
 ```
 
@@ -1428,6 +1449,7 @@ client.lightning.query_routes(
     outgoing_chan_id: 0,
     last_hop_pubkey: '',
     route_hints: [],
+    blinded_payment_paths: [],
     dest_features: [],
     time_pref: 0.0 }
 )
@@ -1740,7 +1762,9 @@ Output:
 [lightning.engineering/lightning/wallet-balance](https://lightning.engineering/api-docs/api/lnd/lightning/wallet-balance/index.html)
 
 ```ruby
-client.lightning.wallet_balance
+client.lightning.wallet_balance(
+  { account: '' }
+)
 ```
 
 Output:
@@ -2283,7 +2307,8 @@ client.signer.mu_sig2_create_session(
     other_signer_public_nonces: [],
     tweaks: [],
     taproot_tweak: nil,
-    version: :MUSIG2_VERSION_UNDEFINED }
+    version: :MUSIG2_VERSION_UNDEFINED,
+    pregenerated_local_nonce: '' }
 )
 ```
 
@@ -2341,7 +2366,8 @@ client.signer.sign_message(
     double_hash: false,
     compact_sig: false,
     schnorr_sig: false,
-    schnorr_sig_tap_tweak: '' }
+    schnorr_sig_tap_tweak: '',
+    tag: '' }
 )
 ```
 
@@ -2376,7 +2402,8 @@ client.signer.verify_message(
   { msg: '',
     signature: '',
     pubkey: '',
-    is_schnorr_sig: false }
+    is_schnorr_sig: false,
+    tag: '' }
 )
 ```
 
@@ -2944,7 +2971,8 @@ client.watchtower_client.add_tower(
 ```ruby
 client.watchtower_client.get_tower_info(
   { pubkey: '',
-    include_sessions: false }
+    include_sessions: false,
+    exclude_exhausted_sessions: false }
 )
 ```
 
@@ -2954,7 +2982,8 @@ Output:
   addresses: [],
   active_session_candidate: false,
   num_sessions: 0,
-  sessions: [] }
+  sessions: [],
+  session_info: [] }
 ```
 
 ### list_towers
@@ -2963,7 +2992,8 @@ Output:
 
 ```ruby
 client.watchtower_client.list_towers(
-  { include_sessions: false }
+  { include_sessions: false,
+    exclude_exhausted_sessions: false }
 )
 ```
 

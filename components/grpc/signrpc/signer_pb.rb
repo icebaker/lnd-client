@@ -50,6 +50,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :compact_sig, :bool, 4
       optional :schnorr_sig, :bool, 5
       optional :schnorr_sig_tap_tweak, :bytes, 6
+      optional :tag, :bytes, 7
     end
     add_message "signrpc.SignMessageResp" do
       optional :signature, :bytes, 1
@@ -59,6 +60,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :signature, :bytes, 2
       optional :pubkey, :bytes, 3
       optional :is_schnorr_sig, :bool, 4
+      optional :tag, :bytes, 5
     end
     add_message "signrpc.VerifyMessageResp" do
       optional :valid, :bool, 1
@@ -97,6 +99,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :tweaks, :message, 4, "signrpc.TweakDesc"
       optional :taproot_tweak, :message, 5, "signrpc.TaprootTweakDesc"
       optional :version, :enum, 6, "signrpc.MuSig2Version"
+      optional :pregenerated_local_nonce, :bytes, 7
     end
     add_message "signrpc.MuSig2SessionResponse" do
       optional :session_id, :bytes, 1

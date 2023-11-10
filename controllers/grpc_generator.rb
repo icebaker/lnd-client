@@ -65,18 +65,35 @@ module LNDClientInternal
     end
 
     def self.apply!(file, content)
-      old_code = content[REQUIRE_REGEX]
-      new_code = content[REQUIRE_REGEX].sub('require', 'require_relative')
+      content.gsub!(REQUIRE_REGEX) do |require_statement|
+        required_file = require_statement.match(/['"](.*)['"]/)[1]
 
-      puts "\n#{Rainbow('>').yellow} #{file}"
-      puts "  #{Rainbow(old_code).red} -> #{Rainbow(new_code).green}"
-      File.write(file, content.gsub(old_code, new_code))
+        relative_path = relative_path_to(file, required_file)
+
+        require_relative_statement = "require_relative '#{relative_path}'"
+
+        puts "\n#{Rainbow('>').yellow} #{file}"
+        puts "  #{Rainbow(require_statement).red} -> #{Rainbow(require_relative_statement).green}"
+
+        require_relative_statement
+      end
+
+      File.write(file, content)
     end
 
     def self.run!(command, print_output: false)
       puts "\n#{Rainbow('>').yellow} #{command}"
       output = `#{command}`
       puts output if print_output
+    end
+
+    def self.relative_path_to(file, required_file)
+      current_dir = File.dirname(file)
+
+      full_required_path = Dir.glob("**/#{required_file}.rb").first
+      relative_path = Pathname.new(full_required_path).relative_path_from(Pathname.new(current_dir)).to_s
+
+      relative_path.sub(/\.rb$/, '').sub(%r{^\./}, '')
     end
   end
 end

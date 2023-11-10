@@ -2,7 +2,7 @@
 # Source: invoicesrpc/invoices.proto for package 'invoicesrpc'
 
 require 'grpc'
-require_relative './invoices_pb'
+require_relative 'invoices_pb'
 
 module Invoicesrpc
   module Invoices

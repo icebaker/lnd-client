@@ -2,7 +2,7 @@
 # Source: chainrpc/chainnotifier.proto for package 'chainrpc'
 
 require 'grpc'
-require_relative './chainnotifier_pb'
+require_relative 'chainnotifier_pb'
 
 module Chainrpc
   module ChainNotifier

@@ -2,7 +2,7 @@
 # Source: neutrinorpc/neutrino.proto for package 'neutrinorpc'
 
 require 'grpc'
-require_relative './neutrino_pb'
+require_relative 'neutrino_pb'
 
 module Neutrinorpc
   module NeutrinoKit
@@ -42,6 +42,7 @@ module Neutrinorpc
       # GetCFilter returns a compact filter from a block.
       rpc :GetCFilter, ::Neutrinorpc::GetCFilterRequest, ::Neutrinorpc::GetCFilterResponse
       #
+      # Deprecated, use chainrpc.GetBlockHash instead.
       # GetBlockHash returns the header hash of a block at a given height.
       rpc :GetBlockHash, ::Neutrinorpc::GetBlockHashRequest, ::Neutrinorpc::GetBlockHashResponse
     end
