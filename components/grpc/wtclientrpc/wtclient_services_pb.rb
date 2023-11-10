@@ -2,7 +2,7 @@
 # Source: wtclientrpc/wtclient.proto for package 'wtclientrpc'
 
 require 'grpc'
-require_relative './wtclient_pb'
+require_relative 'wtclient_pb'
 
 module Wtclientrpc
   module WatchtowerClient

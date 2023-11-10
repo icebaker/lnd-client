@@ -2,7 +2,7 @@
 # Source: peersrpc/peers.proto for package 'peersrpc'
 
 require 'grpc'
-require_relative './peers_pb'
+require_relative 'peers_pb'
 
 module Peersrpc
   module Peers

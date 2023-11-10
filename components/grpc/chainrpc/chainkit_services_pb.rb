@@ -2,7 +2,7 @@
 # Source: chainrpc/chainkit.proto for package 'chainrpc'
 
 require 'grpc'
-require_relative './chainkit_pb'
+require_relative 'chainkit_pb'
 
 module Chainrpc
   module ChainKit
@@ -19,6 +19,9 @@ module Chainrpc
       # lncli: `chain getblock`
       # GetBlock returns a block given the corresponding block hash.
       rpc :GetBlock, ::Chainrpc::GetBlockRequest, ::Chainrpc::GetBlockResponse
+      # lncli: `chain getblockheader`
+      # GetBlockHeader returns a block header with a particular block hash.
+      rpc :GetBlockHeader, ::Chainrpc::GetBlockHeaderRequest, ::Chainrpc::GetBlockHeaderResponse
       # lncli: `chain getbestblock`
       # GetBestBlock returns the block hash and current height from the valid
       # most-work chain.

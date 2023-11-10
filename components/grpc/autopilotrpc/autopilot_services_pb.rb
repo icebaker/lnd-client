@@ -2,7 +2,7 @@
 # Source: autopilotrpc/autopilot.proto for package 'autopilotrpc'
 
 require 'grpc'
-require_relative './autopilot_pb'
+require_relative 'autopilot_pb'
 
 module Autopilotrpc
   module Autopilot

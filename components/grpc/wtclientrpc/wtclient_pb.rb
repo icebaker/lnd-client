@@ -20,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "wtclientrpc.GetTowerInfoRequest" do
       optional :pubkey, :bytes, 1
       optional :include_sessions, :bool, 2
+      optional :exclude_exhausted_sessions, :bool, 3
     end
     add_message "wtclientrpc.TowerSession" do
       optional :num_backups, :uint32, 1
@@ -34,9 +35,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :active_session_candidate, :bool, 3
       optional :num_sessions, :uint32, 4
       repeated :sessions, :message, 5, "wtclientrpc.TowerSession"
+      repeated :session_info, :message, 6, "wtclientrpc.TowerSessionInfo"
+    end
+    add_message "wtclientrpc.TowerSessionInfo" do
+      optional :active_session_candidate, :bool, 1
+      optional :num_sessions, :uint32, 2
+      repeated :sessions, :message, 3, "wtclientrpc.TowerSession"
+      optional :policy_type, :enum, 4, "wtclientrpc.PolicyType"
     end
     add_message "wtclientrpc.ListTowersRequest" do
       optional :include_sessions, :bool, 1
+      optional :exclude_exhausted_sessions, :bool, 2
     end
     add_message "wtclientrpc.ListTowersResponse" do
       repeated :towers, :message, 1, "wtclientrpc.Tower"
@@ -73,6 +82,7 @@ module Wtclientrpc
   GetTowerInfoRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("wtclientrpc.GetTowerInfoRequest").msgclass
   TowerSession = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("wtclientrpc.TowerSession").msgclass
   Tower = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("wtclientrpc.Tower").msgclass
+  TowerSessionInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("wtclientrpc.TowerSessionInfo").msgclass
   ListTowersRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("wtclientrpc.ListTowersRequest").msgclass
   ListTowersResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("wtclientrpc.ListTowersResponse").msgclass
   StatsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("wtclientrpc.StatsRequest").msgclass

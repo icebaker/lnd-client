@@ -11,6 +11,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "chainrpc.GetBlockResponse" do
       optional :raw_block, :bytes, 1
     end
+    add_message "chainrpc.GetBlockHeaderRequest" do
+      optional :block_hash, :bytes, 1
+    end
+    add_message "chainrpc.GetBlockHeaderResponse" do
+      optional :raw_block_header, :bytes, 1
+    end
     add_message "chainrpc.GetBestBlockRequest" do
     end
     add_message "chainrpc.GetBestBlockResponse" do
@@ -29,6 +35,8 @@ end
 module Chainrpc
   GetBlockRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("chainrpc.GetBlockRequest").msgclass
   GetBlockResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("chainrpc.GetBlockResponse").msgclass
+  GetBlockHeaderRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("chainrpc.GetBlockHeaderRequest").msgclass
+  GetBlockHeaderResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("chainrpc.GetBlockHeaderResponse").msgclass
   GetBestBlockRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("chainrpc.GetBestBlockRequest").msgclass
   GetBestBlockResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("chainrpc.GetBestBlockResponse").msgclass
   GetBlockHashRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("chainrpc.GetBlockHashRequest").msgclass
